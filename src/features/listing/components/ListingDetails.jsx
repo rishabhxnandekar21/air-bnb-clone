@@ -118,7 +118,7 @@ export function ListingDetails({ listing }) {
         </div>
       </section>
 
-      <section className="amenities-section">
+      <section className="amenities-section" id="amenities">
         <h2 className="amenities-section__title">What this place offers</h2>
         <div className="amenities-grid">
           {amenities.slice(0, 10).map((amenity) => {
@@ -149,7 +149,7 @@ export function ListingDetails({ listing }) {
         </div>
       </section>
 
-      <section className="reviews-section">
+      <section className="reviews-section" id="reviews">
         <style>{`
           .reviews-list {
             display: grid;
@@ -224,6 +224,17 @@ export function ListingDetails({ listing }) {
             text-decoration: underline;
             text-underline-offset: 0.15rem;
           }
+          .reviews-section__all-button {
+            margin-top: 3rem;
+            padding: 0.9rem 1.35rem;
+            color: var(--color-text);
+            background: var(--color-surface);
+            border: 1px solid var(--color-text);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+          }
           @media (max-width: 48rem) {
             .reviews-list {
               grid-template-columns: 1fr;
@@ -296,6 +307,10 @@ export function ListingDetails({ listing }) {
             </article>
           ))}
         </div>
+
+        <button className="reviews-section__all-button" type="button">
+          Show all {reviews.reviewCount} reviews
+        </button>
       </section>
     </article>
   );

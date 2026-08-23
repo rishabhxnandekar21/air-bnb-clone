@@ -87,6 +87,7 @@ export function ListingDetails({ listing }) {
     translationNotice,
     sleepingArrangements,
     amenities,
+    reviews,
   } = listing;
 
   return (
@@ -158,6 +159,54 @@ export function ListingDetails({ listing }) {
         <div className="availability-section__footer">
           <span className="availability-section__calendar-icon" aria-hidden="true">▣</span>
           <button type="button">Clear dates</button>
+        </div>
+      </section>
+
+      <section className="reviews-section">
+        <div className="reviews-section__hero">
+          <div className="reviews-section__rating-mark" aria-hidden="true">
+            <span>❧</span>
+            <strong>{reviews.rating.toFixed(2)}</strong>
+            <span className="reviews-section__mark-right">❧</span>
+          </div>
+          <h2>Guest favourite</h2>
+          <p>
+            This home is a guest favourite based on ratings, reviews and<br />
+            reliability
+          </p>
+          <button type="button" className="reviews-section__how-link">How reviews work</button>
+        </div>
+
+        <div className="reviews-breakdown">
+          <div className="reviews-breakdown__overall">
+            <h3>Overall rating</h3>
+            {[5, 4, 3, 2, 1].map((score) => (
+              <div className="reviews-rating-bar" key={score}>
+                <span>{score}</span>
+                <span className="reviews-rating-bar__track">
+                  <span className="reviews-rating-bar__fill" style={{ width: score === 5 ? "94%" : score === 4 ? "7%" : "2%" }} />
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {reviews.breakdown.map((item) => (
+            <div className="reviews-breakdown__item" key={item.label}>
+              <h3>{item.label}</h3>
+              <strong>{item.value.toFixed(1)}</strong>
+              <span className="reviews-breakdown__icon" aria-hidden="true">{item.icon}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="review-category-row">
+          {reviews.categories.map((category) => (
+            <button className="review-category" type="button" key={category.label}>
+              <span aria-hidden="true">{category.icon}</span>
+              <strong>{category.label}</strong>
+              <small>{category.count}</small>
+            </button>
+          ))}
         </div>
       </section>
     </article>

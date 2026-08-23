@@ -121,8 +121,7 @@ export function ListingDetails({ listing }) {
         </h2>
 
         <p>
-          {capacity.guests} guests · {capacity.bedrooms} bedroom ·{" "}
-          {capacity.beds} bed · {capacity.bathrooms} bathroom
+          {capacity.guests} guests · {capacity.bedrooms} bedroom · {capacity.beds} bed · {capacity.bathrooms} bathroom
         </p>
       </header>
 
@@ -141,10 +140,6 @@ export function ListingDetails({ listing }) {
       <section className="listing-description">
         <p>{listing.description}</p>
       </section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Where you'll sleep                                                 */}
-      {/* ------------------------------------------------------------------ */}
 
       <section className="sleeping-arrangements">
         <h2 className="sleeping-arrangements__title">Where you'll sleep</h2>
@@ -165,10 +160,6 @@ export function ListingDetails({ listing }) {
           ))}
         </div>
       </section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Amenities                                                          */}
-      {/* ------------------------------------------------------------------ */}
 
       <section className="amenities-section">
         <h2 className="amenities-section__title">What this place offers</h2>
@@ -198,10 +189,6 @@ export function ListingDetails({ listing }) {
           Show all 50 amenities
         </button>
       </section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Availability                                                       */}
-      {/* ------------------------------------------------------------------ */}
 
       <section className="availability-section">
         <h2>5 nights in {location.city}</h2>
@@ -252,19 +239,11 @@ export function ListingDetails({ listing }) {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Reviews                                                            */}
-      {/* ------------------------------------------------------------------ */}
-
       <section className="reviews-section">
-        {/* Review hero */}
-
         <div className="reviews-section__hero">
           <div className="reviews-section__rating-mark" aria-hidden="true">
             <span>❧</span>
-
             <strong>{reviews.rating.toFixed(2)}</strong>
-
             <span className="reviews-section__mark-right">❧</span>
           </div>
 
@@ -280,8 +259,6 @@ export function ListingDetails({ listing }) {
             How reviews work
           </button>
         </div>
-
-        {/* Rating breakdown */}
 
         <div className="reviews-breakdown">
           <div className="reviews-breakdown__overall">
@@ -306,17 +283,13 @@ export function ListingDetails({ listing }) {
           {reviews.breakdown.map((item) => (
             <div className="reviews-breakdown__item" key={item.label}>
               <h3>{item.label}</h3>
-
               <strong>{item.value.toFixed(1)}</strong>
-
               <span className="reviews-breakdown__icon" aria-hidden="true">
                 {item.icon}
               </span>
             </div>
           ))}
         </div>
-
-        {/* Review category chips */}
 
         <div className="review-category-row">
           {reviews.categories.map((category) => (
@@ -326,25 +299,19 @@ export function ListingDetails({ listing }) {
               key={category.label}
             >
               <span aria-hidden="true">{category.icon}</span>
-
               <strong>{category.label}</strong>
-
               <small>{category.count}</small>
             </button>
           ))}
         </div>
 
-        {/* ---------------------------------------------------------------- */}
-        {/* Individual reviews                                               */}
-        {/* ---------------------------------------------------------------- */}
-
         <div className="reviews-list">
-          {reviews.reviews?.map((review) => (
+          {reviews.items?.map((review) => (
             <article className="review-card" key={review.id}>
               <div className="review-card__header">
                 <div className="review-card__avatar">
-                  {review.image ? (
-                    <img src={review.image} alt="" />
+                  {review.avatar ? (
+                    <img src={review.avatar} alt="" />
                   ) : (
                     review.name?.charAt(0)
                   )}
@@ -354,16 +321,14 @@ export function ListingDetails({ listing }) {
                   <h3 className="review-card__guest-name">{review.name}</h3>
 
                   <p className="review-card__hosting">
-                    {review.yearsOnAirbnb} on Airbnb
+                    {review.membership}
                   </p>
                 </div>
               </div>
 
               <div className="review-card__meta">
                 <span className="review-card__stars">★★★★★</span>
-
                 <span className="review-card__dot">·</span>
-
                 <span className="review-card__date">{review.date}</span>
               </div>
 

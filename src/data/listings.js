@@ -101,6 +101,27 @@ export const listings = [
       }
     ],
     amenities: ["Kitchen", "Wifi", "Dedicated workspace", "Free parking on premises", "Pool", "Hot tub", "Pets allowed"],
+    reviews: {
+      rating: 4.95,
+      reviewCount: 19,
+      categories: [
+        { label: "Comfort", count: 6, icon: "🛏️" },
+        { label: "Accuracy", count: 5, icon: "✅" },
+        { label: "Hot tub", count: 5, icon: "🛁" },
+        { label: "Condition", count: 4, icon: "🧼" },
+        { label: "Hospitality", count: 8, icon: "🎁" },
+        { label: "Cleanliness", count: 4, icon: "🧴" },
+        { label: "Amenities", count: 2, icon: "🛋️" }
+      ],
+      breakdown: [
+        { label: "Cleanliness", value: 5.0, icon: "♧" },
+        { label: "Accuracy", value: 5.0, icon: "✓" },
+        { label: "Check-in", value: 5.0, icon: "⌕" },
+        { label: "Communication", value: 5.0, icon: "□" },
+        { label: "Location", value: 4.8, icon: "▱" },
+        { label: "Value", value: 4.8, icon: "◇" }
+      ]
+    },
     description: "Cozy 1BHK in Candolim with a private jacuzzi, designed for a relaxed North Goa stay."
   }
 ];

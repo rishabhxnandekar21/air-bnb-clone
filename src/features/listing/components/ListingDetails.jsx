@@ -83,6 +83,7 @@ export function ListingDetails({ listing }) {
     translationNotice,
     sleepingArrangements,
     amenities,
+    reviews,
   } = listing;
 
   return (
@@ -148,82 +149,78 @@ export function ListingDetails({ listing }) {
           <button type="button">Clear dates</button>
         </div>
       </section>
-    </article>
-  );
-}
 
-export function ListingReviews({ reviews }) {
-  return (
-    <section className="reviews-section" id="reviews">
-      <div className="reviews-section__hero">
-        <div className="reviews-section__rating-mark" aria-hidden="true">
-          <span>❧</span>
-          <strong>{reviews.rating.toFixed(2)}</strong>
-          <span className="reviews-section__mark-right">❧</span>
+      <section className="reviews-section" id="reviews">
+        <div className="reviews-section__hero">
+          <div className="reviews-section__rating-mark" aria-hidden="true">
+            <span>❧</span>
+            <strong>{reviews.rating.toFixed(2)}</strong>
+            <span className="reviews-section__mark-right">❧</span>
+          </div>
+          <h2>Guest favourite</h2>
+          <p>This home is a guest favourite based on ratings, reviews and<br />reliability</p>
+          <button type="button" className="reviews-section__how-link">How reviews work</button>
         </div>
-        <h2>Guest favourite</h2>
-        <p>This home is a guest favourite based on ratings, reviews and<br />reliability</p>
-        <button type="button" className="reviews-section__how-link">How reviews work</button>
-      </div>
 
-      <div className="reviews-breakdown">
-        <div className="reviews-breakdown__overall">
-          <h3>Overall rating</h3>
-          {[5, 4, 3, 2, 1].map((score) => (
-            <div className="reviews-rating-bar" key={score}>
-              <span>{score}</span>
-              <span className="reviews-rating-bar__track">
-                <span className="reviews-rating-bar__fill" style={{ width: score === 5 ? "94%" : score === 4 ? "7%" : "2%" }} />
-              </span>
+        <div className="reviews-breakdown">
+          <div className="reviews-breakdown__overall">
+            <h3>Overall rating</h3>
+            {[5, 4, 3, 2, 1].map((score) => (
+              <div className="reviews-rating-bar" key={score}>
+                <span>{score}</span>
+                <span className="reviews-rating-bar__track">
+                  <span className="reviews-rating-bar__fill" style={{ width: score === 5 ? "94%" : score === 4 ? "7%" : "2%" }} />
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {reviews.breakdown.map((item) => (
+            <div className="reviews-breakdown__item" key={item.label}>
+              <h3>{item.label}</h3>
+              <strong>{item.value.toFixed(1)}</strong>
+              <span className="reviews-breakdown__icon" aria-hidden="true">{item.icon}</span>
             </div>
           ))}
         </div>
 
-        {reviews.breakdown.map((item) => (
-          <div className="reviews-breakdown__item" key={item.label}>
-            <h3>{item.label}</h3>
-            <strong>{item.value.toFixed(1)}</strong>
-            <span className="reviews-breakdown__icon" aria-hidden="true">{item.icon}</span>
-          </div>
-        ))}
-      </div>
+        <div className="review-category-row">
+          {reviews.categories.map((category) => (
+            <button className="review-category" type="button" key={category.label}>
+              <span aria-hidden="true">{category.icon}</span>
+              <strong>{category.label}</strong>
+              <small>{category.count}</small>
+            </button>
+          ))}
+        </div>
 
-      <div className="review-category-row">
-        {reviews.categories.map((category) => (
-          <button className="review-category" type="button" key={category.label}>
-            <span aria-hidden="true">{category.icon}</span>
-            <strong>{category.label}</strong>
-            <small>{category.count}</small>
-          </button>
-        ))}
-      </div>
-
-      <div className="reviews-list">
-        {reviews.items?.map((review) => (
-          <article className="review-card" key={review.id}>
-            <div className="review-card__header">
-              <div className="review-card__avatar">
-                {review.avatar ? <img src={review.avatar} alt="" /> : review.name?.charAt(0)}
+        <div className="reviews-list">
+          {reviews.items?.map((review) => (
+            <article className="review-card" key={review.id}>
+              <div className="review-card__header">
+                <div className="review-card__avatar">
+                  {review.avatar ? <img src={review.avatar} alt="" /> : review.name?.charAt(0)}
+                </div>
+                <div className="review-card__guest">
+                  <h3 className="review-card__guest-name">{review.name}</h3>
+                  <p className="review-card__hosting">{review.membership}</p>
+                </div>
               </div>
-              <div className="review-card__guest">
-                <h3 className="review-card__guest-name">{review.name}</h3>
-                <p className="review-card__hosting">{review.membership}</p>
+              <div className="review-card__meta">
+                <span className="review-card__stars">★★★★★</span>
+                <span className="review-card__dot">·</span>
+                <span className="review-card__date">{review.date}</span>
               </div>
-            </div>
-            <div className="review-card__meta">
-              <span className="review-card__stars">★★★★★</span>
-              <span className="review-card__dot">·</span>
-              <span className="review-card__date">{review.date}</span>
-            </div>
-            <p className="review-card__text">{review.text}</p>
-            {review.showMore && <button className="review-card__show-more" type="button">Show more</button>}
-          </article>
-        ))}
-      </div>
+              <p className="review-card__text">{review.text}</p>
+              {review.showMore && <button className="review-card__show-more" type="button">Show more</button>}
+            </article>
+          ))}
+        </div>
 
-      <button className="reviews-section__all-button" type="button">
-        Show all {reviews.reviewCount} reviews
-      </button>
-    </section>
+        <button className="reviews-section__all-button" type="button">
+          Show all {reviews.reviewCount} reviews
+        </button>
+      </section>
+    </article>
   );
 }

@@ -208,6 +208,40 @@ export function ListingDetails({ listing }) {
             </button>
           ))}
         </div>
+
+        <div className="reviews-list">
+          {reviews.items.map((review) => (
+            <article className="review-card" key={review.id}>
+              <div className="review-card__header">
+                {review.avatar ? (
+                  <img className="review-card__avatar" src={review.avatar} alt="" />
+                ) : (
+                  <div className="review-card__avatar review-card__avatar--fallback" aria-hidden="true">
+                    {review.name.charAt(0)}
+                  </div>
+                )}
+                <div>
+                  <h3>{review.name}</h3>
+                  <p>{review.membership}</p>
+                </div>
+              </div>
+
+              <div className="review-card__meta">
+                <span aria-label="5 star rating">★★★★★</span>
+                <span aria-hidden="true">·</span>
+                <span>{review.date}</span>
+              </div>
+
+              <p className="review-card__text">{review.text}</p>
+
+              {review.showMore && (
+                <button type="button" className="review-card__show-more">
+                  Show more
+                </button>
+              )}
+            </article>
+          ))}
+        </div>
       </section>
     </article>
   );

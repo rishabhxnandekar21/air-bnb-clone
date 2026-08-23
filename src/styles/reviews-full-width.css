@@ -3,10 +3,9 @@
 /* -------------------------------------------------------------------------- */
 
 /*
- * ListingDetails lives in the left column of .listing-content because the
- * booking card occupies the right column. The Airbnb reviews block is a
- * full-content-width section, so it intentionally escapes that left-column
- * width while keeping the same left edge as the listing container.
+ * ListingDetails used to contain the reviews block while the booking
+ * sidebar was stretched across the same grid rows. Keep reviews full width,
+ * and keep the booking group constrained to the pre-reviews listing flow.
  */
 .reviews-section {
   width: var(--listing-max-width) !important;
@@ -22,5 +21,39 @@
 @media (max-width: 48rem) {
   .reviews-section {
     width: 100% !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Booking sidebar scroll behavior                                            */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 901px) {
+  /*
+   * OfferBanner, BookingCard and Report are intentionally one sticky group.
+   * Nothing inside the group gets its own sticky/fixed positioning, so the
+   * coupon can never become detached from the reserve card while scrolling.
+   */
+  .booking-sidebar {
+    position: relative;
+    overflow: visible;
+  }
+
+  .booking-sidebar__sticky {
+    position: sticky;
+    top: 5rem;
+    z-index: 2;
+  }
+
+  .booking-sidebar__sticky > .offer-banner,
+  .booking-sidebar__sticky > .booking-card,
+  .booking-sidebar__sticky > .booking-sidebar__report {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .booking-sidebar__sticky {
+    position: static;
   }
 }

@@ -88,6 +88,43 @@ export function ListingDetails({ listing }) {
 
   return (
     <article className="listing-details">
+      <style>{`
+        @media (min-width: 901px) {
+          .listing-details {
+            display: contents;
+          }
+
+          .listing-details > *:not(style) {
+            grid-column: 1;
+          }
+
+          .listing-details > .reviews-section {
+            grid-column: 1 / -1;
+          }
+
+          .listing-content > .booking-sidebar {
+            grid-column: 2;
+            grid-row: 1 / 11;
+            align-self: stretch;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .listing-details {
+            display: block;
+          }
+
+          .listing-details > *:not(style) {
+            grid-column: auto;
+          }
+
+          .listing-content > .booking-sidebar {
+            grid-column: auto;
+            grid-row: auto;
+          }
+        }
+      `}</style>
+
       <header className="listing-details__intro">
         <h2>{propertyType} in {location.city}, {location.country}</h2>
         <p>{capacity.guests} guests · {capacity.bedrooms} bedroom · {capacity.beds} bed · {capacity.bathrooms} bathroom</p>

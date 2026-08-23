@@ -86,6 +86,20 @@ export const listings = [
         src: terraceImage
       }
     ],
+    sleepingArrangements: [
+      {
+        id: "bedroom",
+        title: "Bedroom",
+        description: "1 double bed",
+        image: bedroomImage
+      },
+      {
+        id: "living-room",
+        title: "Living room",
+        description: "1 sofa",
+        image: loungeImage
+      }
+    ],
     amenities: ["Kitchen", "Wifi", "Dedicated workspace", "Free parking on premises", "Pool", "Hot tub", "Pets allowed"],
     description: "Cozy 1BHK in Candolim with a private jacuzzi, designed for a relaxed North Goa stay."
   }

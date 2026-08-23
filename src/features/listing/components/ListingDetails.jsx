@@ -15,10 +15,7 @@ const AMENITY_ICONS = {
   "Smoke alarm": "◉",
 };
 
-const UNAVAILABLE_AMENITIES = new Set([
-  "Carbon monoxide alarm",
-  "Smoke alarm",
-]);
+const UNAVAILABLE_AMENITIES = new Set(["Carbon monoxide alarm", "Smoke alarm"]);
 
 function getCalendarDays(year, month) {
   const firstDay = new Date(year, month, 1).getDay();
@@ -30,40 +27,66 @@ function getCalendarDays(year, month) {
     const dayOffset = index - firstDay + 1;
 
     if (dayOffset < 1) {
-      return { day: previousMonthDays + dayOffset, muted: true, key: `prev-${index}` };
+      return {
+        day: previousMonthDays + dayOffset,
+        muted: true,
+        key: `prev-${index}`,
+      };
     }
 
     if (dayOffset > daysInMonth) {
-      return { day: dayOffset - daysInMonth, muted: true, key: `next-${index}` };
+      return {
+        day: dayOffset - daysInMonth,
+        muted: true,
+        key: `next-${index}`,
+      };
     }
 
-    return { day: dayOffset, muted: false, key: `${year}-${month}-${dayOffset}` };
+    return {
+      day: dayOffset,
+      muted: false,
+      key: `${year}-${month}-${dayOffset}`,
+    };
   });
 }
 
 function CalendarMonth({ year, month, selectedStart, selectedEnd }) {
-  const monthName = new Intl.DateTimeFormat("en", { month: "long", year: "numeric" }).format(
-    new Date(year, month, 1),
-  );
+  const monthName = new Intl.DateTimeFormat("en", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(year, month, 1));
+
   const days = getCalendarDays(year, month);
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
     <div className="availability-calendar__month">
       <h3>{monthName}</h3>
+
       <div className="availability-calendar__weekdays">
         {weekDays.map((day, index) => (
           <span key={`${day}-${index}`}>{day}</span>
         ))}
       </div>
+
       <div className="availability-calendar__days">
         {days.map((item) => {
-          const isSelected = item.day === selectedStart || item.day === selectedEnd;
-          const isUnavailable = !item.muted && item.day < selectedStart;
+          const isSelected =
+            item.day === selectedStart || item.day === selectedEnd;
+
+          const isUnavailable =
+            !item.muted && selectedStart > 0 && item.day < selectedStart;
 
           return (
             <span
-              className={`availability-calendar__day${item.muted ? " is-muted" : ""}${isUnavailable ? " is-unavailable" : ""}${isSelected ? " is-selected" : ""}`}
+              className={[
+                "availability-calendar__day",
+                item.muted ? "is-muted" : "",
+                isUnavailable ? "is-unavailable" : "",
+                isSelected ? "is-selected" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
               key={item.key}
             >
               {item.day}
@@ -96,14 +119,19 @@ export function ListingDetails({ listing }) {
         <h2>
           {propertyType} in {location.city}, {location.country}
         </h2>
+
         <p>
-          {capacity.guests} guests · {capacity.bedrooms} bedroom · {capacity.beds} bed · {capacity.bathrooms} bathroom
+          {capacity.guests} guests · {capacity.bedrooms} bedroom ·{" "}
+          {capacity.beds} bed · {capacity.bathrooms} bathroom
         </p>
       </header>
 
       <GuestFavourite favourite={favourite} rating={rating} />
+
       <HostInfo host={host} />
+
       <div className="listing-details__divider" />
+
       <ListingHighlights highlights={highlights} />
 
       <p className="translation-notice">
@@ -114,77 +142,162 @@ export function ListingDetails({ listing }) {
         <p>{listing.description}</p>
       </section>
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Where you'll sleep                                                 */}
+      {/* ------------------------------------------------------------------ */}
+
       <section className="sleeping-arrangements">
         <h2 className="sleeping-arrangements__title">Where you'll sleep</h2>
+
         <div className="sleeping-arrangements__grid">
           {sleepingArrangements.map((room) => (
             <article className="sleeping-room" key={room.id}>
-              <img className="sleeping-room__image" src={room.image} alt={room.title} />
+              <img
+                className="sleeping-room__image"
+                src={room.image}
+                alt={room.title}
+              />
+
               <h3 className="sleeping-room__title">{room.title}</h3>
+
               <p className="sleeping-room__description">{room.description}</p>
             </article>
           ))}
         </div>
       </section>
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Amenities                                                          */}
+      {/* ------------------------------------------------------------------ */}
+
       <section className="amenities-section">
         <h2 className="amenities-section__title">What this place offers</h2>
+
         <div className="amenities-grid">
           {amenities.slice(0, 10).map((amenity) => {
             const unavailable = UNAVAILABLE_AMENITIES.has(amenity);
+
             return (
-              <div className={`amenity-item${unavailable ? " is-unavailable" : ""}`} key={amenity}>
-                <span className="amenity-item__icon" aria-hidden="true">{AMENITY_ICONS[amenity] || "○"}</span>
+              <div
+                className={`amenity-item${
+                  unavailable ? " is-unavailable" : ""
+                }`}
+                key={amenity}
+              >
+                <span className="amenity-item__icon" aria-hidden="true">
+                  {AMENITY_ICONS[amenity] || "○"}
+                </span>
+
                 <span>{amenity}</span>
               </div>
             );
           })}
         </div>
+
         <button className="amenities-section__button" type="button">
           Show all 50 amenities
         </button>
       </section>
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Availability                                                       */}
+      {/* ------------------------------------------------------------------ */}
+
       <section className="availability-section">
         <h2>5 nights in {location.city}</h2>
+
         <p className="availability-section__dates">18 Oct 2026 - 23 Oct 2026</p>
 
         <div className="availability-calendar">
-          <button className="availability-calendar__nav" type="button" aria-label="Previous month">‹</button>
-          <CalendarMonth year={2026} month={9} selectedStart={18} selectedEnd={23} />
-          <CalendarMonth year={2026} month={10} selectedStart={0} selectedEnd={0} />
-          <button className="availability-calendar__nav" type="button" aria-label="Next month">›</button>
+          <button
+            className="availability-calendar__nav"
+            type="button"
+            aria-label="Previous month"
+          >
+            ‹
+          </button>
+
+          <CalendarMonth
+            year={2026}
+            month={9}
+            selectedStart={18}
+            selectedEnd={23}
+          />
+
+          <CalendarMonth
+            year={2026}
+            month={10}
+            selectedStart={0}
+            selectedEnd={0}
+          />
+
+          <button
+            className="availability-calendar__nav"
+            type="button"
+            aria-label="Next month"
+          >
+            ›
+          </button>
         </div>
 
         <div className="availability-section__footer">
-          <span className="availability-section__calendar-icon" aria-hidden="true">▣</span>
+          <span
+            className="availability-section__calendar-icon"
+            aria-hidden="true"
+          >
+            ▣
+          </span>
+
           <button type="button">Clear dates</button>
         </div>
       </section>
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Reviews                                                            */}
+      {/* ------------------------------------------------------------------ */}
+
       <section className="reviews-section">
+        {/* Review hero */}
+
         <div className="reviews-section__hero">
           <div className="reviews-section__rating-mark" aria-hidden="true">
             <span>❧</span>
+
             <strong>{reviews.rating.toFixed(2)}</strong>
+
             <span className="reviews-section__mark-right">❧</span>
           </div>
+
           <h2>Guest favourite</h2>
+
           <p>
-            This home is a guest favourite based on ratings, reviews and<br />
+            This home is a guest favourite based on ratings, reviews and
+            <br />
             reliability
           </p>
-          <button type="button" className="reviews-section__how-link">How reviews work</button>
+
+          <button type="button" className="reviews-section__how-link">
+            How reviews work
+          </button>
         </div>
+
+        {/* Rating breakdown */}
 
         <div className="reviews-breakdown">
           <div className="reviews-breakdown__overall">
             <h3>Overall rating</h3>
+
             {[5, 4, 3, 2, 1].map((score) => (
               <div className="reviews-rating-bar" key={score}>
                 <span>{score}</span>
+
                 <span className="reviews-rating-bar__track">
-                  <span className="reviews-rating-bar__fill" style={{ width: score === 5 ? "94%" : score === 4 ? "7%" : "2%" }} />
+                  <span
+                    className="reviews-rating-bar__fill"
+                    style={{
+                      width: score === 5 ? "94%" : score === 4 ? "7%" : "2%",
+                    }}
+                  />
                 </span>
               </div>
             ))}
@@ -193,49 +306,71 @@ export function ListingDetails({ listing }) {
           {reviews.breakdown.map((item) => (
             <div className="reviews-breakdown__item" key={item.label}>
               <h3>{item.label}</h3>
+
               <strong>{item.value.toFixed(1)}</strong>
-              <span className="reviews-breakdown__icon" aria-hidden="true">{item.icon}</span>
+
+              <span className="reviews-breakdown__icon" aria-hidden="true">
+                {item.icon}
+              </span>
             </div>
           ))}
         </div>
 
+        {/* Review category chips */}
+
         <div className="review-category-row">
           {reviews.categories.map((category) => (
-            <button className="review-category" type="button" key={category.label}>
+            <button
+              className="review-category"
+              type="button"
+              key={category.label}
+            >
               <span aria-hidden="true">{category.icon}</span>
+
               <strong>{category.label}</strong>
+
               <small>{category.count}</small>
             </button>
           ))}
         </div>
 
+        {/* ---------------------------------------------------------------- */}
+        {/* Individual reviews                                               */}
+        {/* ---------------------------------------------------------------- */}
+
         <div className="reviews-list">
-          {reviews.items.map((review) => (
+          {reviews.reviews?.map((review) => (
             <article className="review-card" key={review.id}>
               <div className="review-card__header">
-                {review.avatar ? (
-                  <img className="review-card__avatar" src={review.avatar} alt="" />
-                ) : (
-                  <div className="review-card__avatar review-card__avatar--fallback" aria-hidden="true">
-                    {review.name.charAt(0)}
-                  </div>
-                )}
-                <div>
-                  <h3>{review.name}</h3>
-                  <p>{review.membership}</p>
+                <div className="review-card__avatar">
+                  {review.image ? (
+                    <img src={review.image} alt="" />
+                  ) : (
+                    review.name?.charAt(0)
+                  )}
+                </div>
+
+                <div className="review-card__guest">
+                  <h3 className="review-card__guest-name">{review.name}</h3>
+
+                  <p className="review-card__hosting">
+                    {review.yearsOnAirbnb} on Airbnb
+                  </p>
                 </div>
               </div>
 
               <div className="review-card__meta">
-                <span aria-label="5 star rating">★★★★★</span>
-                <span aria-hidden="true">·</span>
-                <span>{review.date}</span>
+                <span className="review-card__stars">★★★★★</span>
+
+                <span className="review-card__dot">·</span>
+
+                <span className="review-card__date">{review.date}</span>
               </div>
 
               <p className="review-card__text">{review.text}</p>
 
               {review.showMore && (
-                <button type="button" className="review-card__show-more">
+                <button className="review-card__show-more" type="button">
                   Show more
                 </button>
               )}

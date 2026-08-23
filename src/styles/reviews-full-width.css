@@ -1,0 +1,26 @@
+/* -------------------------------------------------------------------------- */
+/* Full-width reviews section                                                 */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * ListingDetails lives in the left column of .listing-content because the
+ * booking card occupies the right column. The Airbnb reviews block is a
+ * full-content-width section, so it intentionally escapes that left-column
+ * width while keeping the same left edge as the listing container.
+ */
+.reviews-section {
+  width: var(--listing-max-width) !important;
+  max-width: none !important;
+}
+
+@media (max-width: 82rem) {
+  .reviews-section {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 48rem) {
+  .reviews-section {
+    width: 100% !important;
+  }
+}

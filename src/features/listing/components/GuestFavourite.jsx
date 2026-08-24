@@ -26,7 +26,7 @@ export function GuestFavourite({ favourite, rating }) {
           <strong>Guest favourite</strong>
         </div>
         <div className="guest-favourite__copy">
-          <p>{favourite.description}</p>
+          <p>{favourite.description.replace(/\.$/, "")}</p>
         </div>
         <div className="guest-favourite__rating">
           <strong>{rating.value.toFixed(2)}</strong>

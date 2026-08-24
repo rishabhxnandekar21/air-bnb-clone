@@ -15,10 +15,9 @@
     display: none;
   }
 
-  .listing-header::after {
-    content: "Entire serviced apartment in Candolim, India\A3 guests · 1 bedroom · 1 bed · 1 bathroom";
+  .listing-header::before {
+    content: "Entire serviced apartment in Candolim, India";
     display: block;
-    white-space: pre-line;
     color: var(--color-text);
     font-size: 1.5rem;
     font-weight: 600;
@@ -26,7 +25,13 @@
   }
 
   .listing-header::after {
-    word-spacing: 0;
+    content: "3 guests · 1 bedroom · 1 bed · 1 bathroom";
+    display: block;
+    margin-top: 0.3rem;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4rem;
   }
 
   .photo-gallery {

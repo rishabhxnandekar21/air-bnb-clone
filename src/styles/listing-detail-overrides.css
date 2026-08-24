@@ -9,6 +9,10 @@
     display: none;
   }
 
+  .listing-highlights {
+    border-bottom: 1px solid var(--color-border);
+  }
+
   .reference-description {
     margin-top: 0;
     padding-bottom: 2.75rem;
@@ -44,7 +48,7 @@
   .reference-description__body {
     margin: 0;
     color: var(--color-text);
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.45rem;
   }
 
@@ -64,32 +68,7 @@
 }
 
 @media (max-width: 900px) {
-  .listing-details > .translation-notice,
-  .listing-details > .listing-description {
-    display: none;
-  }
-
   .reference-description {
-    margin: 1.5rem 0;
-  }
-
-  .reference-description__translation {
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background: #f7f7f7;
-  }
-
-  .reference-description__body {
-    margin: 1rem 0 0;
-    font-size: 1rem;
-    line-height: 1.45rem;
-  }
-
-  .reference-description__toggle {
-    margin-top: 1rem;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    text-decoration: underline;
+    display: none;
   }
 }

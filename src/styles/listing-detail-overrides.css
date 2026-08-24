@@ -1,7 +1,61 @@
 @media (min-width: 901px) {
+  .listing-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .listing-header {
+    order: 2;
+    display: block;
+    margin-top: 2.5rem;
+  }
+
+  .listing-header__title,
+  .listing-header__actions {
+    display: none;
+  }
+
+  .listing-header::after {
+    content: "Entire serviced apartment in Candolim, India\A3 guests · 1 bedroom · 1 bed · 1 bathroom";
+    display: block;
+    white-space: pre-line;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.8rem;
+  }
+
+  .listing-header::after {
+    word-spacing: 0;
+  }
+
+  .photo-gallery {
+    order: 1;
+  }
+
+  .listing-subnav {
+    display: none;
+  }
+
+  .listing-content {
+    order: 3;
+    margin-top: 2rem;
+  }
+
+  .location-section,
+  .host-section,
+  .things-section,
+  .nearby-section {
+    order: 4;
+  }
+
+  .listing-details > .listing-details__intro {
+    display: none;
+  }
+
   .listing-details > .reference-description {
     grid-column: 1;
-    grid-row: 6;
+    grid-row: 5;
   }
 
   .listing-details > .translation-notice,

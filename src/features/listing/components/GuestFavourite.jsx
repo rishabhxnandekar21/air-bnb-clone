@@ -1,3 +1,5 @@
+import "../../../styles/listing-reference.css";
+
 function SparkleIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24">

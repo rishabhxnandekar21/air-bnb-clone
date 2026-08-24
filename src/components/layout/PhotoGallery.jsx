@@ -1,4 +1,5 @@
 import { Button } from "../ui/Button";
+import "./PhotoGallery.css";
 
 function GalleryIcon() {
   return (

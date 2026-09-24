@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="1174" viewBox="0 0 1660 1174">
+  <rect width="1660" height="1174" fill="#FFFFFF"/>
+  <defs><marker id="aRead" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#E0295C"/></marker><marker id="aWrite" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F6FB2"/></marker><marker id="aAsync" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8E8E8E"/></marker></defs>
+  <text x="44.0" y="48.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" font-weight="700" fill="#222222">Vacation-rental marketplace — production architecture</text>
+  <text x="44.0" y="72.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="normal" fill="#717171">Scaling strategy for frontend, backend, storage, search and deployment. Three traffic paths are traced, because each one scales differently.</text>
+  <line x1="44" y1="96" x2="70" y2="96" stroke="#E0295C" stroke-width="2.2" stroke-dasharray=""/>
+  <text x="77.0" y="100.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#222222">BROWSE — read-heavy, cacheable, must never block</text>
+  <line x1="452" y1="96" x2="478" y2="96" stroke="#1F6FB2" stroke-width="2.2" stroke-dasharray=""/>
+  <text x="485.0" y="100.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#222222">BOOK — write, strongly consistent, lowest volume</text>
+  <line x1="860" y1="96" x2="886" y2="96" stroke="#8E8E8E" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <text x="893.0" y="100.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#222222">PUBLISH — async fan-out, rebuilds search and caches</text>
+  <rect x="44.0" y="124.0" width="1336.0" height="92.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="150.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">CLIENTS</text>
+  <rect x="226.0" y="140.0" width="273.5" height="62.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="239.0" y="163.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Web SPA (React)</text>
+  <text x="239.0" y="181.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">this repo — desktop listing page</text>
+  <text x="239.0" y="196.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">static bundle, no server runtime</text>
+  <rect x="515.5" y="140.0" width="273.5" height="62.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="528.5" y="163.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">iOS / Android</text>
+  <text x="528.5" y="181.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">native clients, same APIs</text>
+  <rect x="805.0" y="140.0" width="273.5" height="62.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="818.0" y="163.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Partner APIs</text>
+  <text x="818.0" y="181.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">channel managers, OTAs</text>
+  <rect x="1094.5" y="140.0" width="273.5" height="62.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="1107.5" y="163.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Crawlers / SEO</text>
+  <text x="1107.5" y="181.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">need server-rendered HTML</text>
+  <rect x="44.0" y="232.0" width="1336.0" height="104.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="258.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">EDGE</text>
+  <rect x="226.0" y="250.0" width="273.5" height="74.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="239.0" y="273.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">CDN + static hosting</text>
+  <text x="239.0" y="291.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">immutable hashed bundles</text>
+  <text x="239.0" y="306.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">images as AVIF / WebP</text>
+  <rect x="515.5" y="250.0" width="273.5" height="74.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="528.5" y="273.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Edge SSR / ISR</text>
+  <text x="528.5" y="291.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">listing HTML near the user</text>
+  <text x="528.5" y="306.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">revalidated on write</text>
+  <rect x="805.0" y="250.0" width="273.5" height="74.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="818.0" y="273.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">WAF + rate limit</text>
+  <text x="818.0" y="291.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">bot challenge, per-IP quotas</text>
+  <text x="818.0" y="306.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">the reference runs this</text>
+  <rect x="1094.5" y="250.0" width="273.5" height="74.0" rx="8" fill="#F4F9FD" stroke="#1F6FB2" stroke-width="1.6"/>
+  <text x="1107.5" y="273.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">API gateway</text>
+  <text x="1107.5" y="291.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">authn, routing, schema</text>
+  <text x="1107.5" y="306.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">a BFF per client type</text>
+  <rect x="44.0" y="352.0" width="1336.0" height="192.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="378.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">SERVICES</text>
+  <text x="226.0" y="372.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171" font-style="italic">stateless, horizontally scaled behind the gateway</text>
+  <rect x="226.0" y="380.0" width="368.7" height="68.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="239.0" y="403.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Listing service</text>
+  <text x="239.0" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">serves the page in this repo</text>
+  <text x="239.0" y="436.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">read replicas + cache</text>
+  <rect x="612.7" y="380.0" width="368.7" height="68.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="625.7" y="403.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Search service</text>
+  <text x="625.7" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">geo + availability + filters</text>
+  <text x="625.7" y="436.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">its own index and scaling</text>
+  <rect x="999.3" y="380.0" width="368.7" height="68.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="1012.3" y="403.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Availability &amp; pricing</text>
+  <text x="1012.3" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">calendar, rate rules</text>
+  <text x="1012.3" y="436.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">write-heavy, sharded</text>
+  <rect x="226.0" y="464.0" width="272.0" height="68.0" rx="8" fill="#F4F9FD" stroke="#1F6FB2" stroke-width="1.6"/>
+  <text x="239.0" y="487.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Booking service</text>
+  <text x="239.0" y="505.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">reservation state machine</text>
+  <text x="239.0" y="520.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">idempotent, transactional</text>
+  <rect x="516.0" y="464.0" width="272.0" height="68.0" rx="8" fill="#F4F9FD" stroke="#1F6FB2" stroke-width="1.6"/>
+  <text x="529.0" y="487.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Payments</text>
+  <text x="529.0" y="505.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">PSP, payouts, ledger</text>
+  <text x="529.0" y="520.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">PCI-scoped, isolated</text>
+  <rect x="806.0" y="464.0" width="272.0" height="68.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="819.0" y="487.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Reviews &amp; messaging</text>
+  <text x="819.0" y="505.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">moderation, host–guest threads</text>
+  <rect x="1096.0" y="464.0" width="272.0" height="68.0" rx="8" fill="#F7F7F7" stroke="#8E8E8E" stroke-width="1.4"/>
+  <text x="1109.0" y="487.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Host &amp; content</text>
+  <text x="1109.0" y="505.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">listing edits, photo uploads</text>
+  <rect x="44.0" y="560.0" width="1336.0" height="118.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="586.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">STORAGE &amp; SEARCH</text>
+  <rect x="226.0" y="578.0" width="215.6" height="88.0" rx="8" fill="#F4F9FD" stroke="#1F6FB2" stroke-width="1.6"/>
+  <text x="239.0" y="601.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Postgres (primary)</text>
+  <text x="239.0" y="619.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">listings, hosts, bookings</text>
+  <text x="239.0" y="634.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">sharded by region</text>
+  <text x="239.0" y="649.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">read replicas per PoP</text>
+  <rect x="457.6" y="578.0" width="215.6" height="88.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="470.6" y="601.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Redis</text>
+  <text x="470.6" y="619.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">hot listing payloads</text>
+  <text x="470.6" y="634.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">session, rate counters</text>
+  <text x="470.6" y="649.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">cache-aside, short TTL</text>
+  <rect x="689.2" y="578.0" width="215.6" height="88.0" rx="8" fill="#FEF6F8" stroke="#E0295C" stroke-width="1.6"/>
+  <text x="702.2" y="601.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Search index</text>
+  <text x="702.2" y="619.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Elasticsearch / OpenSearch</text>
+  <text x="702.2" y="634.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">geo-sharded, replicated</text>
+  <text x="702.2" y="649.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">rebuilt from events</text>
+  <rect x="920.8" y="578.0" width="215.6" height="88.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="933.8" y="601.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Object storage</text>
+  <text x="933.8" y="619.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">S3 — original photos</text>
+  <text x="933.8" y="634.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">derivatives fronted by CDN</text>
+  <text x="933.8" y="649.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">lifecycle to cold tiers</text>
+  <rect x="1152.4" y="578.0" width="215.6" height="88.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="1165.4" y="601.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Warehouse</text>
+  <text x="1165.4" y="619.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">pricing + ranking models</text>
+  <text x="1165.4" y="634.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">batch, off the hot path</text>
+  <rect x="44.0" y="694.0" width="1336.0" height="104.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="720.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">ASYNC BACKBONE</text>
+  <rect x="226.0" y="712.0" width="273.5" height="72.0" rx="8" fill="#F7F7F7" stroke="#8E8E8E" stroke-width="1.4"/>
+  <text x="239.0" y="735.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Event bus (Kafka)</text>
+  <text x="239.0" y="753.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">listing.updated, booking.confirmed</text>
+  <text x="239.0" y="768.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">partitioned by listing id</text>
+  <rect x="515.5" y="712.0" width="273.5" height="72.0" rx="8" fill="#F7F7F7" stroke="#8E8E8E" stroke-width="1.4"/>
+  <text x="528.5" y="735.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Indexers</text>
+  <text x="528.5" y="753.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">rebuild search, warm caches</text>
+  <rect x="805.0" y="712.0" width="273.5" height="72.0" rx="8" fill="#F7F7F7" stroke="#8E8E8E" stroke-width="1.4"/>
+  <text x="818.0" y="735.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Media pipeline</text>
+  <text x="818.0" y="753.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">transcode, resize, blur-hash</text>
+  <rect x="1094.5" y="712.0" width="273.5" height="72.0" rx="8" fill="#F7F7F7" stroke="#8E8E8E" stroke-width="1.4"/>
+  <text x="1107.5" y="735.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">CDC → analytics</text>
+  <text x="1107.5" y="753.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">to warehouse, ranking features</text>
+  <rect x="44.0" y="814.0" width="1336.0" height="104.0" rx="10" fill="#FAFAFA" stroke="#EBEBEB" stroke-width="1"/>
+  <text x="60.0" y="840.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.5" font-weight="700" fill="#717171" letter-spacing=".09em">DEPLOYMENT &amp; OPS</text>
+  <rect x="226.0" y="832.0" width="215.6" height="72.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="239.0" y="855.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">CI</text>
+  <text x="239.0" y="873.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">typecheck, lint, unit</text>
+  <text x="239.0" y="888.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">visual-diff + a11y gates</text>
+  <rect x="457.6" y="832.0" width="215.6" height="72.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="470.6" y="855.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">CD</text>
+  <text x="470.6" y="873.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">immutable artifacts</text>
+  <text x="470.6" y="888.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">canary then progressive</text>
+  <rect x="689.2" y="832.0" width="215.6" height="72.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="702.2" y="855.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Runtime</text>
+  <text x="702.2" y="873.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">containers on k8s</text>
+  <text x="702.2" y="888.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">HPA on RPS + latency</text>
+  <text x="702.2" y="903.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">multi-AZ, multi-region</text>
+  <rect x="920.8" y="832.0" width="215.6" height="72.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="933.8" y="855.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Observability</text>
+  <text x="933.8" y="873.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">traces, RED metrics</text>
+  <text x="933.8" y="888.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Core Web Vitals RUM</text>
+  <text x="933.8" y="903.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">SLOs with error budgets</text>
+  <rect x="1152.4" y="832.0" width="215.6" height="72.0" rx="8" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.4"/>
+  <text x="1165.4" y="855.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#222222">Feature flags</text>
+  <text x="1165.4" y="873.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">deploy ≠ release</text>
+  <text x="1165.4" y="888.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">per-region kill switches</text>
+  <path d="M362.8 202.0 L362.8 250.0" fill="none" stroke="#E0295C" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aRead)"/>
+  <path d="M652.2 324.0 L652.2 380.0" fill="none" stroke="#E0295C" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aRead)"/>
+  <path d="M410.3 448.0 L410.3 456.0 L797.0 456.0 L797.0 552.0 L565.4 552.0 L565.4 578.0" fill="none" stroke="#E0295C" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aRead)"/>
+  <path d="M797.0 448.0 L797.0 452.0 L1087.0 452.0 L1087.0 548.0 L797.0 548.0 L797.0 578.0" fill="none" stroke="#E0295C" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aRead)"/>
+  <path d="M479.5 202.0 L479.5 224.0 L1231.2 224.0 L1231.2 250.0" fill="none" stroke="#1F6FB2" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aWrite)"/>
+  <path d="M1231.2 324.0 L1231.2 460.0 L362.0 460.0 L362.0 464.0" fill="none" stroke="#1F6FB2" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aWrite)"/>
+  <path d="M362.0 532.0 L362.0 578.0" fill="none" stroke="#1F6FB2" stroke-width="1.7" stroke-dasharray="" marker-end="url(#aWrite)"/>
+  <path d="M1232.0 532.0 L1232.0 552.0 L449.6 552.0 L449.6 690.0 L362.8 690.0 L362.8 712.0" fill="none" stroke="#8E8E8E" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#aAsync)"/>
+  <path d="M652.2 712.0 L652.2 690.0 L797.0 690.0 L797.0 666.0" fill="none" stroke="#8E8E8E" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#aAsync)"/>
+  <path d="M941.8 712.0 L941.8 690.0 L1028.6 690.0 L1028.6 666.0" fill="none" stroke="#8E8E8E" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#aAsync)"/>
+  <path d="M1231.2 712.0 L1231.2 690.0 L1260.2 690.0 L1260.2 666.0" fill="none" stroke="#8E8E8E" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#aAsync)"/>
+  <text x="1384.0" y="168.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#717171" letter-spacing=".06em">FAN-OUT</text>
+  <text x="1384.0" y="185.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">One listing page is served to</text>
+  <text x="1384.0" y="200.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">four client types. Only the web</text>
+  <text x="1384.0" y="215.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">SPA is built here.</text>
+  <text x="1384.0" y="272.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#E0295C" letter-spacing=".06em">ABSORB READS AT THE EDGE</text>
+  <text x="1384.0" y="289.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Anycast PoPs take the spikes.</text>
+  <text x="1384.0" y="304.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Origin sees only cache</text>
+  <text x="1384.0" y="319.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">misses; raising the hit ratio is</text>
+  <text x="1384.0" y="334.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">the cheapest capacity there is.</text>
+  <text x="1384.0" y="392.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#717171" letter-spacing=".06em">SPLIT BY READ/WRITE</text>
+  <text x="1384.0" y="409.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Browse and book scale on</text>
+  <text x="1384.0" y="424.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">different curves, so they scale</text>
+  <text x="1384.0" y="439.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">separately. A booking outage</text>
+  <text x="1384.0" y="454.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">must never take browsing down.</text>
+  <text x="1384.0" y="596.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#1F6FB2" letter-spacing=".06em">CONSISTENCY</text>
+  <text x="1384.0" y="613.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Bookings strongly consistent</text>
+  <text x="1384.0" y="628.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">on the primary. Search and</text>
+  <text x="1384.0" y="643.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">reviews are eventual — a</text>
+  <text x="1384.0" y="658.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">stale review is survivable,</text>
+  <text x="1384.0" y="673.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">a double booking is not.</text>
+  <text x="1384.0" y="726.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#8E8E8E" letter-spacing=".06em">WRITES NEVER BLOCK READS</text>
+  <text x="1384.0" y="743.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">The index is rebuilt off the</text>
+  <text x="1384.0" y="758.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">event stream, not in the</text>
+  <text x="1384.0" y="773.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">request. Replay rebuilds it</text>
+  <text x="1384.0" y="788.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">from scratch after a bad deploy.</text>
+  <text x="1384.0" y="846.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#717171" letter-spacing=".06em">DEGRADE, NEVER FAIL</text>
+  <text x="1384.0" y="863.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">Stale cache is served when a</text>
+  <text x="1384.0" y="878.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">service is unhealthy. Flags kill</text>
+  <text x="1384.0" y="893.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">a feature without a rollback.</text>
+  <rect x="44.0" y="946.0" width="1572.0" height="104.0" rx="10" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1.2"/>
+  <text x="62.0" y="972.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#717171" letter-spacing=".09em">SCALING LEVERS, CHEAPEST FIRST</text>
+  <text x="62.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">1</text>
+  <text x="79.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Raise CDN cache-hit ratio</text>
+  <text x="79.0" y="1013.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">longer TTLs, fewer cache keys</text>
+  <text x="574.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">2</text>
+  <text x="591.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Edge SSR / ISR</text>
+  <text x="591.0" y="1013.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">render once, revalidate on write</text>
+  <text x="1086.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">3</text>
+  <text x="1103.0" y="998.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Redis in front of reads</text>
+  <text x="1103.0" y="1013.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">cache-aside on the listing payload</text>
+  <text x="62.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">4</text>
+  <text x="79.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Add read replicas</text>
+  <text x="79.0" y="1047.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">one per PoP, routed by region</text>
+  <text x="574.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">5</text>
+  <text x="591.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Shard Postgres by region</text>
+  <text x="591.0" y="1047.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">listings are region-local</text>
+  <text x="1086.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#E0295C">6</text>
+  <text x="1103.0" y="1032.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#222222">Split the search tier</text>
+  <text x="1103.0" y="1047.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="normal" fill="#717171">its own index, its own scaling</text>
+  <text x="44.0" y="1082.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#717171">Browse path: CDN or edge SSR → listing service → Redis → Postgres read replica. A listing render never touches booking or payments.</text>
+  <text x="44.0" y="1101.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#717171">Book path: gateway → booking service → Postgres primary, then an event. Search is never written to directly — indexers rebuild it from the stream.</text>
+  <text x="44.0" y="1120.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#717171">This submission implements the Web SPA box only: a static React bundle on a CDN, with content as a typed module standing in for the shape the listing service would return.</text>
+  <text x="44.0" y="1139.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.5" font-weight="normal" fill="#717171">Media here is served as static files under /images, which matches the object-storage plus image-CDN path above, without the transcoding pipeline.</text>
+</svg>

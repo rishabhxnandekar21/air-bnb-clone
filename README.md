@@ -110,3 +110,15 @@ was obtained. It also records the mistakes found along the way and what they wer
 may be the more useful read.
 
 `REFERENCE_SPEC.md` holds the measured specification.
+
+`PROMPTS.md` is the prompt log for the work recorded in it — a remediation and
+documentation pass, not the original build. Its opening section says so.
+
+## Architecture
+
+`docs/architecture.svg` (and the same drawing as `.png`) is a production
+architecture for a vacation-rental marketplace at scale, covering frontend,
+backend, storage, search and deployment. Three traffic paths are traced
+through it separately — browse, book and publish — because each scales on a
+different curve. The footer records which single box of it this repository
+actually implements.

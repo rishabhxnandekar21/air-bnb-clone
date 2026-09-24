@@ -1,0 +1,8 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+}

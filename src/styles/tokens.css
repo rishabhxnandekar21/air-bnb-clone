@@ -1,0 +1,93 @@
+:root {
+  /* Colour. Each token is named for the job it does here; the values are the
+     ones the reference renders. */
+  --color-text-primary: #222222;   /* headings and body copy               */
+  --color-text-secondary: #717171; /* captions, meta lines, struck labels  */
+  --color-text-muted: #6a6a6a;     /* the quietest supporting text         */
+  --color-primary: #ff385c;        /* brand mark and primary actions       */
+  --color-surface: #ffffff;        /* page ground and every card           */
+  --color-surface-muted: #f7f7f7;  /* hover fills and notice rows          */
+  --color-grey-200: #f2f2f2;       /* round icon buttons                   */
+  --color-grey-300: #ebebeb;       /* header and sticky-nav hairlines      */
+  --color-gallery-placeholder: #eeeeee;
+  --color-border: #dddddd;         /* card and chip borders                */
+  --color-border-soft: #ebebeb;    /* rules between page sections          */
+  --color-card-border: rgba(0, 0, 0, 0.08);
+  /* The booking card's date/guest box uses a darker rule than --color-border. */
+  --color-field-border: #b0b0b0;
+
+  /* Reserve is a three-stop gradient, not a flat fill. */
+  --gradient-reserve: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+  --gradient-reserve-hover: linear-gradient(to right, #d81b5f 0%, #c31a5b 50%, #bd0463 100%);
+
+  --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.18);
+
+  /* Typography
+   * The reference sets its type in Airbnb Cereal VF. That font is
+   * proprietary — it is not published under any public licence and is not
+   * carried by any font service — so it is deliberately not vendored here.
+   * DM Sans carries the page instead: an open geometric sans with a
+   * comparable x-height and similar letterform proportions. It is narrower
+   * than Cereal at the same size, so long paragraphs wrap a line or two
+   * later; every other metric is unaffected. The earlier names are kept in
+   * the stack so a licensed installation is picked up automatically. */
+  --font-family-base:
+    'Airbnb Cereal VF', Circular, -apple-system, BlinkMacSystemFont, 'system-ui', Roboto,
+    'Helvetica Neue', 'DM Sans', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-wordmark: 600;
+
+  /* Body defaults */
+  --font-size-base: 14px;
+  --line-height-base: 1.43;
+
+  --font-size-title: 26px;
+  --font-weight-title: var(--font-weight-medium);
+  --line-height-title: 30px;
+  --letter-spacing-title: normal;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-round: 50%;
+
+  /* Layout */
+  --header-height: 88px;
+  --header-padding-inline: 80px;
+  --listing-width: 1120px;
+  /* Outer cap, applied before the 80px page padding. */
+  --listing-container: 1280px;
+  --photo-tour-width: 976px;
+  --booking-width: 372px;
+  --gallery-gap: 8px;
+  --content-grid-gap: 96px;
+  --amenities-modal-width: 780px;
+  --sticky-nav-height: 66px;
+  --booking-sticky-top: 100px;
+
+  /* Z-index */
+  --z-header: 100;
+  --z-photo-tour: 200;
+  --z-lightbox: 300;
+  --z-skip-link: 400;
+
+  /* Motion */
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 320ms;
+  --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}

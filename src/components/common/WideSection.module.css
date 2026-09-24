@@ -1,0 +1,13 @@
+.section {
+  padding: var(--space-7) 0;
+  border-top: 1px solid var(--color-border-soft);
+  scroll-margin-top: calc(var(--sticky-nav-height) + var(--space-4));
+}
+
+.heading {
+  margin: 0 0 var(--space-5);
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}

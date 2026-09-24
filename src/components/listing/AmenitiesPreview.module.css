@@ -1,0 +1,60 @@
+/* Reference: two columns, 16px row / 8px column gap, 16px labels. */
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: 16px;
+  padding: var(--space-1) 0;
+}
+
+.itemIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Amenities the listing does not have are greyed and struck through. */
+.itemUnavailable {
+  color: var(--color-text-secondary);
+}
+
+.itemUnavailable .label {
+  text-decoration: line-through;
+}
+
+.showAllButton {
+  border: 1px solid var(--color-text-primary);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 13px 23px;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.15s,
+    transform 0.05s;
+}
+
+.showAllButton:hover {
+  background-color: var(--color-surface-muted);
+}
+
+.showAllButton:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 743px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,8 @@
+.title {
+  margin: 0;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,151 @@
+.location {
+  font-size: 16px;
+  margin-bottom: var(--space-5);
+}
+
+.mapFrame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 480px;
+  background-color: #e8eef0;
+}
+
+/* Two soft green landmasses over a diagonal coast — the reference draws the
+   whole map from three stacked gradients rather than loading map tiles. */
+.mapSurface {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, #cfe3c8 0 6%, transparent 6%),
+    radial-gradient(circle at 70% 60%, #cfe3c8 0 8%, transparent 8%),
+    linear-gradient(115deg, #acd3e6 0 34%, #e9f0e4 34% 100%);
+}
+
+/* Faint 90px graticule over the landmass, as the reference draws it. */
+.mapSurface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(180, 180, 170, 0.5) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(180, 180, 170, 0.35) 1px, transparent 1px);
+  background-size:
+    90px 90px,
+    90px 90px;
+  opacity: 0.5;
+}
+
+.searchButton {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-round);
+  background-color: var(--color-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+}
+
+.searchButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.zoomControls {
+  position: absolute;
+  right: var(--space-3);
+  top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.zoomControls button {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: var(--color-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+}
+
+.zoomControls svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Centred marker standing in for the approximate area. */
+.marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-round);
+  background-color: var(--color-text-primary);
+  color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.marker svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.notice {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  margin-top: 18px;
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  margin: 40px 0 var(--space-3);
+}
+
+.highlight {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.showMore {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 18px;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chevron {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 743px) {
+  .mapFrame {
+    height: 320px;
+  }
+}

@@ -1,0 +1,124 @@
+/* Measured on the reference: centered card ~780px wide, roughly 85% of
+   viewport height, rounded corners, 40x40 close button inset ~16px from
+   the card edge, dark semi-transparent backdrop. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--amenities-modal-width);
+  max-height: 85vh;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding-inline: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-round);
+  color: var(--color-text-primary);
+  transition: background-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.closeButton:hover {
+  background-color: var(--color-surface-muted);
+}
+
+.content {
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-7) var(--space-7);
+}
+
+.heading {
+  margin: 0 0 var(--space-5);
+  font-size: 22px;
+  font-weight: var(--font-weight-medium);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 15px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .dialog {
+    max-width: none;
+    max-height: 90vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+}
+
+.group {
+  margin-bottom: var(--space-6);
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.groupHeading {
+  margin: 0 0 var(--space-3);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+}
+
+.itemUnavailable {
+  color: var(--color-text-secondary);
+}
+
+.itemUnavailable .label {
+  text-decoration: line-through;
+}

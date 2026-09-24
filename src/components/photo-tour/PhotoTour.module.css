@@ -1,0 +1,34 @@
+/* Reference opens the tour by fading it in while it rises 28px. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-photo-tour);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  animation: tourIn 0.3s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes tourIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: none;
+  }
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

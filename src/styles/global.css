@@ -1,0 +1,91 @@
+/*
+ * The reference self-hosts Airbnb's proprietary variable font at this exact
+ * path. The file is not redistributable, so it is not committed here — the
+ * declaration is kept so that dropping AirbnbCerealVF.woff2 into
+ * public/assets/fonts/ makes the type match the reference exactly. Until
+ * then the stack in tokens.css falls through to DM Sans.
+ */
+@font-face {
+  font-family: 'Airbnb Cereal VF';
+  src: url('/assets/fonts/AirbnbCerealVF.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* The reference drives its in-page nav with native smooth scrolling. */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

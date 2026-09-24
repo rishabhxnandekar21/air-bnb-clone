@@ -1,0 +1,49 @@
+.actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.actionButton {
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 10px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.15s,
+    transform 0.05s;
+}
+
+.actionButton:hover {
+  background-color: var(--color-grey-200);
+}
+
+.actionButton:active {
+  transform: scale(0.96);
+}
+
+.actionButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Only the label is underlined on the reference, not the whole control. */
+.actionLabel {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.heartIcon {
+  color: var(--color-text-primary);
+}
+
+.heartIconSaved {
+  color: var(--color-primary);
+  fill: var(--color-primary);
+}

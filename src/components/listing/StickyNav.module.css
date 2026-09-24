@@ -1,0 +1,150 @@
+/* A fixed bar pinned to the top of the viewport,
+   hidden and non-interactive by default, sliding down with a fade once the
+   hero gallery has scrolled past. Inner row is 66px tall, capped at the
+   1280px container with the same 80px page padding as the header. */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-soft);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.navVisible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
+}
+
+.inner {
+  max-width: var(--listing-container);
+  margin-inline: auto;
+  padding-inline: var(--header-padding-inline);
+  height: var(--sticky-nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tabsNav {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.tab {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  padding: 22px var(--space-2);
+  position: relative;
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+}
+
+.tab:hover {
+  color: #000000;
+}
+
+/* Underline is inset 8px each side and sits 12px off the bottom. */
+.tabActive::after {
+  content: '';
+  position: absolute;
+  left: var(--space-2);
+  right: var(--space-2);
+  bottom: 12px;
+  height: 2px;
+  background-color: var(--color-text-primary);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.priceBlock {
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.price {
+  font-weight: var(--font-weight-medium);
+  font-size: 15px;
+}
+
+.nights {
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  font-size: 13px;
+}
+
+.rating {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.starIcon {
+  width: 11px;
+  height: 11px;
+}
+
+/* Small Reserve variant: same gradient as the booking card, 40px tall. */
+.reserveButton {
+  border: none;
+  color: var(--color-surface);
+  background: var(--gradient-reserve);
+  font-weight: var(--font-weight-medium);
+  border-radius: 999px;
+  height: 40px;
+  font-size: 14px;
+  padding: 0 20px;
+  transition:
+    filter 0.15s,
+    transform 0.05s;
+}
+
+.reserveButton:hover {
+  background: var(--gradient-reserve-hover);
+}
+
+.reserveButton:active {
+  transform: scale(0.985);
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding-inline: var(--space-5);
+  }
+}
+
+@media (max-width: 900px) {
+  .summary {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .tabsNav {
+    overflow-x: auto;
+  }
+}

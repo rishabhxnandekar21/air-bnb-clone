@@ -1,0 +1,76 @@
+/* Reference: 32px above, 18px below the title row. */
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-6) 18px;
+}
+
+.galleryWrapper {
+  scroll-margin-top: var(--sticky-nav-height);
+}
+
+/* Reference: minmax(0,1fr) + a fixed 372px rail with a 96px column gap. */
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--booking-width);
+  gap: 0 var(--content-grid-gap);
+  align-items: stretch;
+}
+
+.bookingColumn {
+  position: relative;
+  align-self: stretch;
+}
+
+.bookingRail {
+  position: sticky;
+  top: var(--booking-sticky-top);
+  scroll-margin-top: var(--booking-sticky-top);
+}
+
+/* The reference drops the booking rail entirely below 1128px rather than
+   stacking it under the content. */
+@media (max-width: 1128px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bookingColumn {
+    display: none;
+  }
+}
+
+@media (max-width: 743px) {
+  .titleRow {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
+
+/* Sits under the booking card inside the sticky rail, per the reference. */
+.reportListing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: 26px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.reportLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: underline;
+}
+
+.reportIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}

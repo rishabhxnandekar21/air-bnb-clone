@@ -1,0 +1,119 @@
+/*
+ * The grid is proportional (35fr 17fr 17fr),
+ * not a fixed 50% + two columns, and its height comes from an aspect ratio
+ * of 1120/494 rather than a hard pixel height — so it scales correctly as
+ * the container narrows while still measuring 1120x494 at full width.
+ */
+.wrapper {
+  position: relative;
+  margin-bottom: var(--space-7);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 35fr 17fr 17fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--gallery-gap);
+  aspect-ratio: 1120 / 494;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.primaryCell,
+.secondaryCell {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-gallery-placeholder);
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.primaryCell {
+  grid-row: span 2;
+}
+
+.tileImage {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tiles darken slightly on hover and depress a hair on press. */
+.primaryCell::after,
+.secondaryCell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  pointer-events: none;
+}
+
+.primaryCell:hover::after,
+.secondaryCell:hover::after {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.primaryCell:active,
+.secondaryCell:active {
+  transform: scale(0.997);
+}
+
+.showAllButton {
+  position: absolute;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-text-primary);
+  border-radius: var(--radius-md);
+  padding: 7px 15px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.1s,
+    background-color 0.15s;
+}
+
+.showAllButton:hover {
+  background-color: var(--color-surface-muted);
+}
+
+.showAllButton:active {
+  transform: scale(0.96);
+}
+
+.showAllButton svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* The reference collapses to a single 280px-tall image below 743px. */
+@media (max-width: 743px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: 280px;
+    height: 280px;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+
+  .secondaryCell {
+    display: none;
+  }
+
+  .wrapper {
+    margin-inline: calc(var(--space-5) * -1);
+    margin-bottom: var(--space-6);
+  }
+
+  .showAllButton {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+}

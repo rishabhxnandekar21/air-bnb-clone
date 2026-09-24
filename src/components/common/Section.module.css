@@ -1,0 +1,22 @@
+/* Reference: 32px block padding with a soft rule above each section, and
+   no rule above the first one. Headings are 22/26 at medium weight. */
+.section {
+  padding: var(--space-6) 0;
+  scroll-margin-top: calc(var(--sticky-nav-height) + var(--space-4));
+}
+
+.bordered {
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.section:first-child {
+  border-top: none;
+}
+
+.heading {
+  margin: 0 0 var(--space-5);
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}

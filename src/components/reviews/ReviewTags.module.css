@@ -1,0 +1,38 @@
+.tags {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding: var(--space-1) 0 30px;
+  scrollbar-width: none;
+}
+
+.tags::-webkit-scrollbar {
+  display: none;
+}
+
+.tag {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 13px 18px 13px 14px;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.tagCount {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.tagIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}

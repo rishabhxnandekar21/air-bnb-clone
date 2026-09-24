@@ -1,0 +1,39 @@
+/* Reference: heading column and photo column side by side, 60px apart,
+   with the heading sticking 20px from the top of the scroll area. */
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 60px;
+  align-items: start;
+  padding: var(--space-4) 0 var(--space-1);
+}
+
+.headingColumn {
+  position: sticky;
+  top: 20px;
+}
+
+.heading {
+  margin: 0;
+  font-size: 32px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.count {
+  margin: var(--space-2) 0 0;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 1128px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+
+  .headingColumn {
+    position: static;
+  }
+}

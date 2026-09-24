@@ -1,0 +1,76 @@
+.pill {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background-color: var(--color-surface);
+  transition: box-shadow 0.2s ease;
+}
+
+.pill:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.segment {
+  border: none;
+  background: none;
+  padding: 0 var(--space-4);
+  height: 48px;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: 40px;
+  color: var(--color-text-primary);
+}
+
+.segmentMuted {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Deliberately 48px and pulled 6px left, matching the reference — the
+   artwork has generous internal padding, so it optically reads smaller. */
+.houseIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: fill;
+  display: block;
+  margin-left: -6px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-border);
+}
+
+.searchButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-round);
+  background-color: var(--color-primary);
+  margin-left: var(--space-2);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.searchButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: no-repeat center / 14px 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'><circle cx='14' cy='14' r='9'/><path d='M21 21l7 7'/></svg>");
+}
+
+@media (max-width: 900px) {
+  .pill {
+    display: none;
+  }
+}

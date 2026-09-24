@@ -1,0 +1,31 @@
+/*
+ * The page container: a 1280px cap with 80px page padding, which yields the
+ * 1120px content column at wide viewports. Padding steps down at 1128px and
+ * 743px — the two widths at which this layout actually needs to change,
+ * rather than at round numbers.
+ */
+.content-container {
+  max-width: var(--listing-container);
+  margin-inline: auto;
+  padding-inline: var(--header-padding-inline);
+}
+
+@media (max-width: 1128px) {
+  .content-container {
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 743px) {
+  .content-container {
+    padding-inline: var(--space-5);
+  }
+}
+
+/* Reference's Photo Tour column: a 1024px cap with 24px padding, which
+   yields the 976px content width, and 96px of clearance at the bottom. */
+.photo-tour-container {
+  max-width: 1024px;
+  margin-inline: auto;
+  padding: 0 var(--space-5) 96px;
+}

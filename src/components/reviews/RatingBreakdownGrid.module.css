@@ -1,0 +1,76 @@
+/* Reference: one wide distribution column then six equal score columns,
+   separated by hairlines. Collapses to two columns below 1128px. */
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(6, 1fr);
+  gap: 0;
+  padding: var(--space-2) 0 40px;
+}
+
+.column {
+  padding: 0 var(--space-5);
+}
+
+.column + .column {
+  border-left: 1px solid var(--color-border);
+}
+
+.columnLabel {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-3);
+}
+
+.columnScore {
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2);
+}
+
+.columnIcon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-primary);
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.barStar {
+  font-size: 12px;
+  color: var(--color-text-primary);
+}
+
+.barTrack {
+  height: 4px;
+  background-color: var(--color-border-soft);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background-color: var(--color-text-primary);
+}
+
+@media (max-width: 1128px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .column,
+  .column + .column {
+    border-left: none;
+    padding: 10px 0;
+  }
+}

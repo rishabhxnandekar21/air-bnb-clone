@@ -1,0 +1,32 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Reference: 3:2 image with an 8px radius and a hairline card border, then
+   the room label 14px below it. */
+.imageWrapper {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-card-border);
+  overflow: hidden;
+}
+
+.room {
+  margin: 14px 0 0;
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 743px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

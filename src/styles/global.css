@@ -1,16 +1,14 @@
 /*
- * The reference self-hosts Airbnb's proprietary variable font at this exact
- * path. The file is not redistributable, so it is not committed here — the
- * declaration is kept so that dropping AirbnbCerealVF.woff2 into
- * public/assets/fonts/ makes the type match the reference exactly. Until
- * then the stack in tokens.css falls through to DM Sans.
+ * Airbnb Cereal VF is proprietary: not published under any public licence and
+ * not carried by any font service, so it is deliberately not vendored. There
+ * is no @font-face for it here — declaring one against a file this project
+ * does not ship costs a failed request on every page load and renders nothing.
+ *
+ * The name stays at the head of --font-family-base in tokens.css, so a machine
+ * with the font installed picks it up locally at no network cost. Everywhere
+ * else DM Sans carries the page; it is narrower at the same size, so long
+ * paragraphs wrap a line or two later. That is the one known type difference.
  */
-@font-face {
-  font-family: 'Airbnb Cereal VF';
-  src: url('/assets/fonts/AirbnbCerealVF.woff2') format('woff2-variations');
-  font-weight: 200 900;
-  font-display: swap;
-}
 
 *,
 *::before,

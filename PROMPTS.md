@@ -277,3 +277,98 @@ script.
 Second pass fixed two band labels (`STORAGE & SEARCH`, `DEPLOYMENT & OPS`)
 that overran the label column and collided with the first node in their row —
 found by looking at the render, not by reading the coordinates.
+
+---
+
+## Prompt 08 — Check the project against the assignment PDF
+
+**Prompt**
+
+Read the assignment PDF again and check whether this project contains
+everything it asks for.
+
+**Result**
+
+Most of it did. Three views present, desktop only, React, motion and
+`prefers-reduced-motion` in place, build and lint clean.
+
+Three deliverables had appeared since the previous pass, and all six files
+were **byte-identical to another project of the owner's** that had already
+been submitted: the three `.claude/agents/*.md`, the `visual-qa` skill, and
+`docs/architecture.{png,svg,html}`, which had overwritten the diagram
+generated here.
+
+Worse than duplication, two of them did not work in this repository. The
+agents invoke `npm run qa:local`, `qa:diff`, `qa:sections` and `qa:widths`;
+this project's `package.json` has `dev`, `build`, `lint` and `preview`, and
+there is no `scripts/` directory. The skill points at `scripts/states.mjs`,
+which does not exist, and asserts a reference height of 6258px and a brand
+red of `#EB4C60` — this project renders `#ff385c`, so `code-reviewer` would
+have flagged the correct colour as wrong.
+
+**Notes**
+
+Copied configs are worse than missing ones. A missing config is a gap; a
+config that names commands the project does not have is a claim that fails
+the moment anyone runs it.
+
+---
+
+## Prompt 09 — Make it genuinely this project's own
+
+**Prompt**
+
+Apart from the repo being public, improve everything so it doesn't look like
+exact copies. Tweak the agents and skills, create the missing files, and
+generate a new high-level diagram.
+
+**Result**
+
+Adapted rather than disguised — the configs are different because they now
+describe this repository, which is also what makes them work.
+
+- **`CLAUDE.md`** written from scratch: token discipline, content-as-data,
+  URL-driven modal state, originality, accessibility, scope. The rules the
+  agents enforce now exist in the repo they enforce them in.
+- **Four agents**, rewritten against real tooling. `visual-qa` measures the
+  DOM against recorded values because there is no capture harness and adding
+  one is out of scope. `a11y-auditor` traces a nine-step chain over this
+  project's own overlays. `code-reviewer` enforces `CLAUDE.md`. A fourth,
+  **`originality-auditor`**, is new and specific to this codebase's history —
+  it distinguishes copied *source* from the colour values and listing content
+  the assignment actually requires.
+- **Two skills**: `visual-qa` rewritten for DOM measurement, and a new
+  `submission-check` that runs five gates before packaging.
+- **The diagram regenerated** in this project's `#ff385c`, with a footer line
+  describing how `src/data/` stands in for the listing service.
+
+**Two real defects found and fixed.** The a11y audit was run rather than
+assumed, and it surfaced more than the known Tab-trap gap:
+
+1. The Photo Tour had **no focus management at all**.
+2. **Escape unwound two layers at once.** Both overlays listened on `window`
+   and both called `goBack()`. Driving it: `?modal=PHOTO_TOUR_SCROLLABLE&modalItem=1000`
+   went straight to `/` on a single Escape.
+
+Both fixed by one hook, `useOverlayFocus`, with an `isTopmost` flag so a
+covered overlay stops owning the keyboard. Verified by driving: 40 Tab
+presses stay inside each of the three overlays; Escape closes only the
+Lightbox and returns focus to the exact tile that opened it; a second Escape
+closes the tour and restores scroll; arrows still move 1005 → 1006 → 1005.
+
+Also: the dangling `@font-face` for a font this project does not ship was
+removed — it cost a failed request on every page load and rendered nothing.
+`DECISIONS.md` rewritten 842 → 194 lines and `REFERENCE_SPEC.md` 230 → 122,
+both now describing the code as it is, with the porting vocabulary and the
+self-contradiction gone.
+
+**Notes**
+
+The first Escape test was invalid and is recorded because the failure mode is
+easy to repeat: deep-linking to `?modal=...&modalItem=...` leaves no history
+for `goBack()` to pop, so nothing happened and it looked like a pass. The
+defect only appeared once the overlays were opened through the UI. A second
+attempt was also invalid — the click landed on a category-nav button rather
+than a photo, so the Lightbox never opened and the test silently measured the
+wrong thing. Both are why the a11y agent says to trace every step and
+distrust an assertion that passes without evidence.

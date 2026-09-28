@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { PHOTOS } from '../../data';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
+import { useOverlayFocus } from '../../hooks/useOverlayFocus';
 import { LightboxHeader } from './LightboxHeader';
 import { LightboxControls } from './LightboxControls';
 import { LightboxImage } from './LightboxImage';
@@ -24,29 +25,19 @@ export function Lightbox({ currentIndex, onNavigate, onClose }: LightboxProps) {
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < PHOTOS.length - 1;
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useBodyScrollLock();
-
-  // Capture the trigger element once on mount, focus the dialog, and
-  // restore focus to the trigger on unmount — independent of how many
-  // times `currentIndex` changes while the Lightbox stays open.
-  useEffect(() => {
-    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    closeButtonRef.current?.focus();
-    return () => {
-      previouslyFocusedRef.current?.focus();
-    };
-  }, []);
+  // Always the topmost layer while mounted, so it owns Escape: closing it
+  // must unwind exactly one history entry and leave the tour open beneath.
+  useOverlayFocus(overlayRef, closeButtonRef, { onEscape: onClose });
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (isTextInput(event.target)) {
         return;
       }
-      if (event.key === 'Escape') {
-        onClose();
-      } else if (event.key === 'ArrowLeft' && hasPrevious) {
+      if (event.key === 'ArrowLeft' && hasPrevious) {
         event.preventDefault();
         onNavigate(currentIndex - 1);
       } else if (event.key === 'ArrowRight' && hasNext) {
@@ -56,14 +47,21 @@ export function Lightbox({ currentIndex, onNavigate, onClose }: LightboxProps) {
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, hasPrevious, hasNext, onNavigate, onClose]);
+  }, [currentIndex, hasPrevious, hasNext, onNavigate]);
 
   if (!photo) {
     return null;
   }
 
   return (
-    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div
+      ref={overlayRef}
+      tabIndex={-1}
+      className={styles.overlay}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo viewer"
+    >
       <LightboxHeader
         photo={photo}
         position={currentIndex + 1}

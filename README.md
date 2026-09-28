@@ -109,7 +109,14 @@ reference actually renders, not the first five.
 was obtained. It also records the mistakes found along the way and what they were traced to, which
 may be the more useful read.
 
-`REFERENCE_SPEC.md` holds the measured specification.
+`REFERENCE_SPEC.md` is the implementation spec — what is rendered, at what
+measurements, and what is deliberately not rendered. Values are marked [V]
+where verified against the reference and [I] where internal to this build.
+
+`CLAUDE.md` holds the rules every change has to follow, and `.claude/` holds
+the four sub-agent configs and two skills that enforce them — visual
+measurement, the keyboard and focus chain, the project rules, originality,
+and a five-gate pre-submission check.
 
 `PROMPTS.md` is the prompt log for the work recorded in it — a remediation and
 documentation pass, not the original build. Its opening section says so.

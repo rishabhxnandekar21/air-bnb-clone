@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { PHOTO_CATEGORIES, PHOTOS, PHOTOS_BY_CATEGORY, TOTAL_PHOTO_COUNT } from '../../data';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
+import { useOverlayFocus } from '../../hooks/useOverlayFocus';
 import { PhotoTourHeader } from './PhotoTourHeader';
 import { PhotoTourCategoryNav } from './PhotoTourCategoryNav';
 import { CategorySection } from './CategorySection';
@@ -9,6 +10,8 @@ import styles from './PhotoTour.module.css';
 interface PhotoTourProps {
   onClose: () => void;
   onSelectPhoto: (index: number) => void;
+  /** False while the Lightbox is stacked above this overlay. */
+  isTopmost?: boolean;
 }
 
 if (import.meta.env.DEV) {
@@ -24,23 +27,24 @@ if (import.meta.env.DEV) {
   }
 }
 
-export function PhotoTour({ onClose, onSelectPhoto }: PhotoTourProps) {
+export function PhotoTour({ onClose, onSelectPhoto, isTopmost = true }: PhotoTourProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useBodyScrollLock();
-
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  // Focus lands on the dialog surface rather than the first control, so
+  // opening the tour does not paint a focus ring the reference never shows.
+  useOverlayFocus(overlayRef, overlayRef, { isTopmost, onEscape: onClose });
 
   return (
-    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Photo tour">
+    <div
+      ref={overlayRef}
+      tabIndex={-1}
+      className={styles.overlay}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo tour"
+    >
       <PhotoTourHeader onClose={onClose} />
       <div className={styles.scrollArea} ref={scrollContainerRef}>
         <div className="photo-tour-container">

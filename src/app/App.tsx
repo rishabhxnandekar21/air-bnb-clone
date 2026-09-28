@@ -27,6 +27,7 @@ export function App() {
       </main>
       {isPhotoTourOpen && (
         <PhotoTour
+          isTopmost={lightboxIndex === null}
           onClose={goBack}
           onSelectPhoto={(index) => navigate({ modal: 'PHOTO_TOUR_SCROLLABLE', lightboxIndex: index })}
         />

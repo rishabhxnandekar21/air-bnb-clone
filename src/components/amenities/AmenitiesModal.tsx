@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { cx } from '../../utils/classNames';
 import type { AmenityCategory } from '../../types';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
+import { useOverlayFocus } from '../../hooks/useOverlayFocus';
 import { IconClose } from '../common/icons';
 import { AmenityIcon } from './AmenityIcon';
 import styles from './AmenitiesModal.module.css';
@@ -11,57 +12,12 @@ interface AmenitiesModalProps {
   onClose: () => void;
 }
 
-const FOCUSABLE_SELECTOR = 'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
 export function AmenitiesModal({ categories, onClose }: AmenitiesModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useBodyScrollLock();
-
-  useEffect(() => {
-    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    closeButtonRef.current?.focus();
-    return () => {
-      previouslyFocusedRef.current?.focus();
-    };
-  }, []);
-
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        onClose();
-        return;
-      }
-
-      if (event.key !== 'Tab' || !dialogRef.current) {
-        return;
-      }
-
-      const focusable = [...dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)];
-      if (focusable.length === 0) {
-        return;
-      }
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (!first || !last) {
-        return;
-      }
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  useOverlayFocus(dialogRef, closeButtonRef, { onEscape: onClose });
 
   return (
     <div className={styles.backdrop}>

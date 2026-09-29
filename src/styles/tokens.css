@@ -24,17 +24,23 @@
   --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.18);
 
   /* Typography
-   * The reference sets its type in Airbnb Cereal VF. That font is
-   * proprietary — it is not published under any public licence and is not
-   * carried by any font service — so it is deliberately not vendored here.
-   * DM Sans carries the page instead: an open geometric sans with a
-   * comparable x-height and similar letterform proportions. It is narrower
-   * than Cereal at the same size, so long paragraphs wrap a line or two
-   * later; every other metric is unaffected. The earlier names are kept in
-   * the stack so a licensed installation is picked up automatically. */
+   * DM Sans leads the stack unconditionally, and the type this page renders
+   * is deliberately not the reference's.
+   *
+   * Two reasons, and the second is the operative one. The face the reference
+   * uses is proprietary — not published under any public licence, not carried
+   * by any font service — so it could not be vendored. Beyond that, the
+   * typography here is meant to differ: no proprietary family is named in the
+   * stack at all, so the page renders in DM Sans on every machine rather than
+   * matching the reference on any machine that happens to have the original
+   * installed.
+   *
+   * DM Sans is an open geometric sans with a comparable x-height. It is
+   * narrower at the same size, so long paragraphs wrap a line or two later.
+   * That difference is intended and is not a spacing bug to chase. */
   --font-family-base:
-    'Airbnb Cereal VF', Circular, -apple-system, BlinkMacSystemFont, 'system-ui', Roboto,
-    'Helvetica Neue', 'DM Sans', sans-serif;
+    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;

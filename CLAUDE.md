@@ -59,11 +59,15 @@ Copying the reference's *code* is not.
 
 - Icons are original line artwork on a 24 grid, ~1.5px stroke, in
   `src/data/amenityIconPaths.ts`. Not an icon pack, not traced paths.
-- The brand mark in `AirbnbLogo.tsx` is an original drawing. The Airbnb
-  logotype is not reproduced; the wordmark is set as type.
-- Airbnb Cereal VF is proprietary and is deliberately not vendored. DM Sans
-  carries the page. Run widths stay slightly narrow as a result — that is
-  documented, not a bug to chase.
+- The brand mark in `BrandMark.tsx` is an original drawing, and it is
+  deliberately a *different figure* from the reference's, not a variant of
+  it. Do not redraw it closer to the original. The logotype is not
+  reproduced either; the wordmark is set as ordinary type.
+- The type is deliberately not the reference's. `--font-family-base` leads
+  with DM Sans and names no proprietary family at all, so the page renders
+  the same everywhere rather than matching the reference on a machine that
+  happens to have the original installed. Run widths stay slightly narrow
+  as a result — intended, not a bug to chase.
 - Never introduce a comment describing code as ported, extracted or lifted
   from the reference. If that would be accurate, the code is wrong, not the
   comment.

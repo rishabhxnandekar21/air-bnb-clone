@@ -72,10 +72,12 @@ number to close the gap.
 
 ## Deliberate deviations — do not report these
 
-- **Type runs slightly narrow.** Airbnb Cereal is proprietary and is not
-  vendored; DM Sans is narrower at the same size, so long paragraphs wrap a
-  line or two later. Documented in `tokens.css`. If a type difference is
-  uniform across the whole page, this is the cause.
+- **Type runs slightly narrow, on purpose.** The typography is deliberately
+  not the reference's — DM Sans leads the stack and no proprietary family is
+  named, so the page renders identically on every machine. DM Sans is
+  narrower at the same size, so long paragraphs wrap a line or two later.
+  A uniform type difference across the page is this, and closing it would
+  undo a deliberate decision.
 - **"Show all 50 amenities" against 44 rows**, and **"Show all 19 reviews"
   against 6 texts**. The counts are what the listing states; the data is what
   could be sourced. Inventing rows to reconcile them is a defect, not a fix.

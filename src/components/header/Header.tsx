@@ -1,5 +1,5 @@
 import { IconGlobe, IconMenu } from '../common/icons';
-import { AirbnbLogo } from '../common/AirbnbLogo';
+import { BrandMark } from '../common/BrandMark';
 import { SearchPill } from './SearchPill';
 import styles from './Header.module.css';
 
@@ -14,7 +14,7 @@ export function Header() {
     <header className={styles.header} id="siteHeader">
       <div className={styles.inner}>
         <button type="button" className={styles.brand} aria-label="Airbnb homepage">
-          <AirbnbLogo className={styles.brandLogo} />
+          <BrandMark className={styles.brandLogo} />
           <span className={styles.brandWordmark}>airbnb</span>
         </button>
 

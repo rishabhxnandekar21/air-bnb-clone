@@ -48,8 +48,10 @@ find src -name '*.ts' -o -name '*.tsx' -o -name '*.css' | xargs awk 'length > 50
 
 A single SVG `path` of several thousand characters is traced or extracted
 artwork, not a drawing. Icons here are original line work on a 24 grid in
-`src/data/amenityIconPaths.ts`, and the brand mark in `AirbnbLogo.tsx` is an
-original drawing — both should stay short and legible.
+`src/data/amenityIconPaths.ts`, and the brand mark in `BrandMark.tsx` is an
+original drawing of a deliberately different figure — both should stay short
+and legible. Flag any change that redraws the mark closer to the reference's,
+or that reintroduces a proprietary family name into `--font-family-base`.
 
 ### 4. Proprietary assets
 

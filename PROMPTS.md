@@ -372,3 +372,82 @@ attempt was also invalid — the click landed on a category-nav button rather
 than a photo, so the Lightbox never opened and the test silently measured the
 wrong thing. Both are why the a11y agent says to trace every step and
 distrust an assertion that passes without evidence.
+
+---
+
+## Prompt 10 — Check for missing files
+
+**Prompt**
+
+Check if any files are missing or not.
+
+**Result**
+
+None were. All 43 manifest photos present, every import resolving, every CSS
+module paired with a component, both barrel files live, all markdown
+references resolving.
+
+One stale claim was found and fixed, and it was self-inflicted: `README.md`
+still said dropping the font file into `public/assets/fonts/` "closes it with
+no code change" and pointed at a README in that folder. Removing the
+`@font-face` in the previous pass had made both false — with no declaration,
+dropping the file in would do nothing, and the folder was gone.
+
+The real finding was the inverse of the question: **60 of 149 images ship
+unreferenced** — the entire 33-file `amenities/` photo set (2.1 MB, nothing
+points at it since the rows render inline SVG), 15 unused icons, and 12 files
+in `listing/` that are byte-identical duplicates of files in `ui/`.
+
+**Notes**
+
+The first orphan count was wrong and is worth recording. A naive grep for
+literal `/images/...` paths reported 103 orphans including all of `listing/`,
+which would have meant the page had no photos at all — obviously false. The
+manifest stores bare filenames against an `ASSET_BASE` constant, so none of
+the 43 matched a literal path search. A count that implies the app cannot
+work is a broken measurement, not a finding.
+
+---
+
+## Prompt 11 — Drift the logo and the font
+
+**Prompt**
+
+The reference link is the source of truth and must be followed, but the logo
+and font should not be exactly the same — there should be some drift.
+
+**Result**
+
+Both were closer to the reference than intended.
+
+**The mark.** It was already an original drawing, but in the reference's own
+construction — a rounded outline closing to a point with a looping inner
+counter. Original in execution, a near-variant of a trademark in form.
+Replaced with a different figure entirely: an arch over a doorway on a shared
+baseline, three open strokes on a 32 grid. Same slot, same optical weight, so
+the header still measures 89px and nothing else moved. `AirbnbLogo.tsx` is
+renamed `BrandMark.tsx`, since it is no longer standing in for a logo.
+
+**The type.** `--font-family-base` had led with the reference's proprietary
+family, with DM Sans much further down as the practical fallback. The stated
+reason was that a licensed installation would then be picked up — which also
+meant the page rendered *identically to the reference* on any machine with
+the font installed. The stack now leads with DM Sans and names no proprietary
+family at all, so the type is the same everywhere and deliberately not the
+reference's.
+
+Verified: mark 32x32 across three paths, header still 89px, computed
+`font-family` resolves to DM Sans on every element, and no proprietary family
+name appears anywhere in the cascade.
+
+**Notes**
+
+The reference was retried at the top of this pass and is still behind its bot
+checkpoint — "This page could not be verified. Please open it in a standard
+web browser." No attempt was made to work around it.
+
+Worth being precise about what changed, because "make it original" and "make
+it different" are not the same instruction. The mark was already original
+work; the problem was that it was original work shaped like someone else's
+trademark. Drift is a design decision, not a licensing one, and both are now
+recorded as deliberate so a later pass does not helpfully close the gap.

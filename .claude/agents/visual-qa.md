@@ -66,11 +66,12 @@ End with the single next action.
 
 ## Traps that produce false findings here
 
-- **The font.** Airbnb Cereal is deliberately not vendored; DM Sans is
-  narrower at the same size, so text runs measure slightly short and long
-  paragraphs wrap a line later. That is documented in `tokens.css` and is
-  **not** a delta to chase. If a type difference is uniform across the whole
-  page, this is why.
+- **The font is intentionally different.** The type here is not the
+  reference's and is not meant to be: DM Sans leads the stack and no
+  proprietary family is named. It is narrower at the same size, so runs
+  measure short and long paragraphs wrap a line later. A uniform type
+  difference across the whole page is this, and it is **not** a delta to
+  chase or to close.
 - **Scrollbar gutter.** A classic scrollbar narrows the viewport and
   re-centres the content column, shifting every x measurement by 7–8px.
   Confirm the viewport width before trusting an x.

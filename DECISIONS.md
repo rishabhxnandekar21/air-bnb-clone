@@ -80,10 +80,19 @@ insists on it.
 ## 4. Icons and the brand mark are drawn, not traced
 
 `src/data/amenityIconPaths.ts` holds original line icons on a 24 grid —
-~1.5px stroke, rounded caps and joins, colour from `currentColor`. The brand
-mark in `AirbnbLogo.tsx` is an original drawing in the same construction as
-the reference's: a rounded outline closing to a point with an open inner
-counter.
+~1.5px stroke, rounded caps and joins, colour from `currentColor`.
+
+The brand mark in `BrandMark.tsx` goes further than original: it is a
+**deliberately different figure**. An earlier version was an original
+drawing but in the reference's own construction — a rounded outline closing
+to a point with a looping inner counter — which is a near-variant of a
+trademark rather than a mark of this project's own. It is now an arch over
+a doorway on a shared baseline: three open strokes, nothing in common with
+the original's geometry. It keeps the same 32px slot and optical weight, so
+the header's measurements are unchanged.
+
+This is the one place the build is intentionally *not* trying to match the
+reference. Redrawing the mark closer to the original would undo the point.
 
 Not an icon pack. Lucide and Heroicons carry their own proportions and read
 as foreign next to the rest of the page.
@@ -94,14 +103,24 @@ share a pictogram — fridge/freezer, kitchen/cooking-basics, the two entrance
 rows — and this stores each drawing once. `ShapeName = keyof typeof SHAPES`
 makes a typo in the mapping a compile error rather than a silently blank slot.
 
-The Airbnb logotype is not reproduced. The wordmark beside the mark is set as
-type, at weight 600 — 700 reads heavier than the lettering it stands in for.
+The logotype is not reproduced either. The wordmark beside the mark is set as
+ordinary type at weight 600 — 700 reads heavier than the lettering it stands
+in for.
 
 ## 5. The font is a licensing decision, not an oversight
 
-The reference sets its type in Airbnb Cereal VF. It is proprietary: not
-published under any public licence, not carried by any font service. Serving
-it over HTTP does not grant a redistribution licence, so it is not vendored.
+Two things are true here, and the second is the operative one.
+
+The face the reference uses is proprietary: not published under any public
+licence, not carried by any font service, and serving it over HTTP grants no
+redistribution licence. So it could not be vendored.
+
+Beyond that, the typography here is **meant** to differ. `--font-family-base`
+leads with DM Sans and names no proprietary family at all — not at the head
+of the stack, not as a fallback. An earlier version listed the original first
+so a licensed installation would be picked up, which meant the page matched
+the reference exactly on any machine that happened to have the font. That is
+the opposite of the intent.
 
 There is also **no `@font-face` for it**. An earlier version declared one
 against a path this project does not ship, which cost a failed request on

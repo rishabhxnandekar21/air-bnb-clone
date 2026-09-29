@@ -55,17 +55,18 @@ Across 1536 / 1128 / 743 / 390: zero console errors, zero broken images, zero ho
 
 ## Known difference
 
-**Typography.** The reference self-hosts Airbnb Cereal VF. That file is not redistributable and
-was not obtainable, so the font stack falls through to DM Sans — declared exactly as the reference
-declares it, with the same `@font-face` path. Every metric above already matches; the only visible
-consequence is that DM Sans is slightly narrower, so a long paragraph wraps a line or two later.
+Two things here differ from the reference on purpose, and both are the one place this build is
+not trying to match it.
 
-Dropping `AirbnbCerealVF.woff2` into `public/assets/fonts/` closes it with no code change. See
-`public/assets/fonts/README.md`.
+**Typography.** The face the reference uses is proprietary, so it could not be vendored — but the
+type is also meant to differ. `--font-family-base` leads with DM Sans and names no proprietary
+family at all, so the page renders the same everywhere rather than matching the reference on a
+machine that happens to have the original installed. DM Sans is slightly narrower, so a long
+paragraph wraps a line or two later. Every metric above is unaffected.
 
-Because the `@font-face` still points at that path, the deployed site logs one 404 for it on load.
-That is the declaration looking for a font that was deliberately not committed — `font-display:
-swap` means the fallback renders immediately and nothing waits on it.
+**The brand mark.** An original drawing, and a different figure rather than a variant — an arch
+over a doorway on a shared baseline. It keeps the same 32px slot and optical weight, so the
+header's geometry is unchanged. The logotype is not reproduced; the wordmark is set as type.
 
 ## Structure
 

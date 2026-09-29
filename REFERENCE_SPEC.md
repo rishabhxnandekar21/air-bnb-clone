@@ -58,10 +58,15 @@ Reserve is a three-stop gradient, not a flat fill [V].
 
 ## Typography
 
-Airbnb Cereal VF is proprietary and is not vendored, and no `@font-face`
-declares it. DM Sans carries the page; it is narrower at the same size, so
-long paragraphs wrap a line or two later. That is the one known type
-difference (`DECISIONS.md` §5).
+**Deliberately divergent [I].** The type is not the reference's and is not
+meant to be. `--font-family-base` leads with DM Sans and names no proprietary
+family; nothing is vendored and no `@font-face` declares one. DM Sans is
+narrower at the same size, so long paragraphs wrap a line or two later
+(`DECISIONS.md` §5).
+
+The brand mark is likewise a different figure, not a variant — an arch over a
+doorway, in the same 32px slot and optical weight as the mark it replaces
+(`DECISIONS.md` §4).
 
 Title 26px / 30px line-height / 500. Body 14–16px. Booking-card field labels
 10px uppercase, 500, 0.03em.

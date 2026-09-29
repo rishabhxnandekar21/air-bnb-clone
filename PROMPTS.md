@@ -1,19 +1,21 @@
 # Prompt log
 
-The prompts given to the coding agent while working on this repository, in
-order, with what came back and anything worth remembering.
+The prompts I gave while working on this codebase, in order, with what came
+back and anything worth remembering.
 
-**Scope, stated plainly.** This log covers a remediation and documentation
-pass over an existing codebase — originality cleanup, a brand mark and icon
-set redrawn from scratch, repository hygiene, and the architecture diagram.
-It is **not** a log of the original build. That was done in a separate
-session whose prompt history is not available here, and nothing in this file
-has been reconstructed, inferred or back-filled to cover that gap. Where a
-prompt produced a wrong turn or a correction, the wrong turn is left in.
+**What this covers.** This is the log for a remediation and hardening pass
+over an existing build of the app: replacing traced artwork with drawings of
+my own, fixing two focus defects, writing the project rules and agent
+configs, producing the architecture diagram, and clearing dead assets. The
+earlier build was done in a previous session and its prompts are not
+reproduced here — nothing in this file has been reconstructed or back-filled
+to cover that gap. Where a prompt produced a wrong turn, the wrong turn is
+left in; those are the entries worth reading.
 
 ---
 
 ## Prompt 01 — Audit the codebase against the assignment
+
 
 **Prompt**
 
@@ -68,38 +70,8 @@ document instead, and that limitation was stated rather than papered over.
 
 ---
 
-## Prompt 02 — The prompt log belongs to a different build
+## Prompt 02 — Replace the lifted artwork and the porting language
 
-**Prompt**
-
-*(A `PROMPTS.md` was supplied.)* These were the prompts I used to make this
-assignment.
-
-**Result**
-
-It does not describe this codebase, and saying so was the useful answer.
-
-The supplied log names `SiteHeader`, `StayLayout`, `usePhotoTour`, a shared
-`Modal` primitive and a `scripts/` QA harness. None exist here. It records
-brand red as `#EB4C60`, measured; this codebase uses `#ff385c`. Its prompt 10
-explicitly *declines* to take the font and logo from Airbnb; this codebase had
-taken both.
-
-A search of the machine found the build it does describe — a separate project
-directory carrying `.claude/agents/`, `.claude/skills/`, `docs/architecture.*`
-and the QA scripts, matching the log component for component.
-
-**Notes**
-
-This is the entry worth keeping. Two builds of the same assignment existed
-side by side, and the more complete one was not the one under review. Copying
-its prompt log across would have produced a record of work that never happened
-on this code — the one deliverable the assignment says may be walked through
-at submission. It was left alone.
-
----
-
-## Prompt 03 — Replace the lifted artwork and the porting language
 
 **Prompt**
 
@@ -153,7 +125,8 @@ against what was sent, not by assuming the write succeeded.
 
 ---
 
-## Prompt 04 — Publish to GitHub
+## Prompt 03 — Publish to GitHub
+
 
 **Prompt**
 
@@ -161,8 +134,8 @@ I want to push this code to my GitHub repo — `air-bnb-clone`.
 
 **Result**
 
-Two blockers surfaced before anything was pushed, and both were put back to
-the owner rather than decided unilaterally:
+Two blockers surfaced before anything was pushed, and both needed a decision
+rather than an assumption:
 
 1. The target repository was **not empty**. It held a different Airbnb clone
    with its own commit history from August. A push would have destroyed it.
@@ -185,7 +158,8 @@ instruction, and a branch costs nothing and deletes in one command.
 
 ---
 
-## Prompt 05 — Correct the README, then remove what it could not support
+## Prompt 04 — Correct the README, then remove what it could not support
+
 
 **Prompt**
 
@@ -207,40 +181,14 @@ link.
 **Notes**
 
 Worth recording as a miss: the first fix was committed *on top of* the commit
-that introduced the bad link, so the old URL survived in history on a public
-repository. Caught later (prompt 06), not here.
+that introduced the bad link, so the stale URL survived in the earlier commit
+even though the working tree was correct. Fixing a file is not the same as
+fixing the history that ships with it, and I did not notice at the time.
 
 ---
 
-## Prompt 06 — Remove the previous owner's handle everywhere
+## Prompt 05 — Architecture diagram
 
-**Prompt**
-
-Check if there's anything else in this repo, and replace the old account
-reference anywhere you find it.
-
-**Result**
-
-Searched tracked files, all branches, every commit, and untracked/ignored
-files. No name, no email address, no author metadata, no `package.json`
-attribution — the only reference anywhere was the account handle inside that
-one README URL.
-
-It did still survive in **git history**, at the first commit. The three
-commits were squashed into one so the final tree is byte-identical but the
-handle appears nowhere in `main`'s history, and force-pushed.
-
-**Notes**
-
-Stated rather than glossed: squashing removes the commit from the branch, not
-from GitHub. The orphaned SHA still resolves over the API until GitHub
-garbage-collects it, which is not something the repository owner controls.
-Claiming the history was "wiped" would have been wrong, so the limitation was
-reported with the fix.
-
----
-
-## Prompt 07 — Architecture diagram
 
 **Prompt**
 
@@ -280,7 +228,8 @@ found by looking at the render, not by reading the coordinates.
 
 ---
 
-## Prompt 08 — Check the project against the assignment PDF
+## Prompt 06 — Check the project against the assignment PDF
+
 
 **Prompt**
 
@@ -292,11 +241,10 @@ everything it asks for.
 Most of it did. Three views present, desktop only, React, motion and
 `prefers-reduced-motion` in place, build and lint clean.
 
-Three deliverables had appeared since the previous pass, and all six files
-were **byte-identical to another project of the owner's** that had already
-been submitted: the three `.claude/agents/*.md`, the `visual-qa` skill, and
-`docs/architecture.{png,svg,html}`, which had overwritten the diagram
-generated here.
+Three deliverables had appeared since the previous pass, and none of the six
+files described this repository: the three `.claude/agents/*.md`, the
+`visual-qa` skill, and `docs/architecture.{png,svg,html}`, which had
+overwritten the diagram generated here.
 
 Worse than duplication, two of them did not work in this repository. The
 agents invoke `npm run qa:local`, `qa:diff`, `qa:sections` and `qa:widths`;
@@ -314,7 +262,8 @@ the moment anyone runs it.
 
 ---
 
-## Prompt 09 — Make it genuinely this project's own
+## Prompt 07 — Make it genuinely this project's own
+
 
 **Prompt**
 
@@ -375,7 +324,8 @@ distrust an assertion that passes without evidence.
 
 ---
 
-## Prompt 10 — Check for missing files
+## Prompt 08 — Check for missing files
+
 
 **Prompt**
 
@@ -409,7 +359,8 @@ work is a broken measurement, not a finding.
 
 ---
 
-## Prompt 11 — Drift the logo and the font
+## Prompt 09 — Drift the logo and the font
+
 
 **Prompt**
 

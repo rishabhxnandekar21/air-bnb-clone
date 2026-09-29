@@ -1,13 +1,16 @@
 /*
- * Airbnb Cereal VF is proprietary: not published under any public licence and
- * not carried by any font service, so it is deliberately not vendored. There
- * is no @font-face for it here — declaring one against a file this project
- * does not ship costs a failed request on every page load and renders nothing.
+ * There is no @font-face here, on purpose.
  *
- * The name stays at the head of --font-family-base in tokens.css, so a machine
- * with the font installed picks it up locally at no network cost. Everywhere
- * else DM Sans carries the page; it is narrower at the same size, so long
- * paragraphs wrap a line or two later. That is the one known type difference.
+ * The face the reference uses is proprietary — not published under any public
+ * licence, not carried by any font service — so it could not be vendored, and
+ * declaring an @font-face against a file this project does not ship would cost
+ * a failed request on every page load while rendering nothing.
+ *
+ * The type is also meant to differ. No proprietary family is named anywhere in
+ * --font-family-base (see tokens.css), so the page renders in DM Sans on every
+ * machine rather than matching the reference on one that happens to have the
+ * original installed. DM Sans is narrower at the same size, so long paragraphs
+ * wrap a line or two later — intended, not a defect.
  */
 
 *,

@@ -123,5 +123,6 @@ Verified by driving the page:
 
 ## Open
 
-The raster icons under `public/images/` are not original work and are still to
-be redrawn (`DECISIONS.md`, "Open").
+46 raster icons under `public/images/` are not original work and are still to be
+redrawn (`DECISIONS.md`, "Open"). The 60 files nothing referenced have been
+removed; all 89 that remain are reachable from the code.

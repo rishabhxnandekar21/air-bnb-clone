@@ -208,6 +208,13 @@ two places is provably wrong either way.
 
 ## Open
 
-The raster icons under `public/images/icons/` and `public/images/ui/` are not
-original work. They are still to be replaced by drawings in the same 24-grid
-language as the amenity set, at which point `AssetIcon` goes away.
+**Raster icons.** 46 files under `public/images/icons/` and `public/images/ui/`
+are not original work — they are rendered through `AssetIcon` in the feature
+highlights, rating breakdown, host block and "Things to know". They are still to
+be redrawn in the same 24-grid language as the amenity set, at which point
+`AssetIcon` goes away entirely.
+
+Unused assets were cleared in the meantime: 60 files that nothing referenced —
+the whole 33-file `amenities/` photo set, 15 unused icons, and 12 duplicates of
+files that live in `ui/` — leaving 89 of the original 149. Every remaining file
+is reachable from the code.

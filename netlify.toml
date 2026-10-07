@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 requires Node 20.19+, 22.12+ or 24+. Netlify's default image node
+  # can lag behind that, so pin it rather than inherit.
+  NODE_VERSION = "22"
+
+# Vite fingerprints everything under /assets, so those files are safe to cache
+# forever. index.html must not be, or a deploy would not reach returning
+# visitors.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# No SPA catch-all redirect here on purpose. Modal state rides in the query
+# string on "/", so the app only ever owns one path and Netlify serves it
+# directly. A catch-all would make /anything render the listing page instead
+# of returning an honest 404.

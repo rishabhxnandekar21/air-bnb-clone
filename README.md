@@ -1,4 +1,4 @@
-# Airbnb Listing Page — PlayPower Labs Placement Assessment
+# Airbnb Listing Page
 
 A React 19 + TypeScript + Vite implementation of an Airbnb listing page, built to match a
 reference deployment as closely as possible.

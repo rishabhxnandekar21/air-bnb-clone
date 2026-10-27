@@ -3,8 +3,9 @@
 A React 19 + TypeScript + Vite implementation of an Airbnb listing page, built to match a
 reference deployment as closely as possible.
 
-**Source:** https://github.com/rishabhxnandekar21/air-bnb-clone
-**Reference:** `https://airbnb-clone-umber-two.vercel.app/`
+**Live:** [https://air-bnb-clone-xi-one.vercel.app](https://air-bnb-clone-xi-one.vercel.app)
+
+**Reference:** https://airbnb-clone-umber-two.vercel.app/
 
 ## Running it
 
